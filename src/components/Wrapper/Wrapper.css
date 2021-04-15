@@ -1,0 +1,207 @@
+.wrapper {
+  padding: 2rem;
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper .heading {
+  text-align: center;
+  font: normal normal 3.5rem 'HenrietteBold';
+  color: #545871;
+  text-transform: uppercase;
+}
+
+.footer {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  padding: 1.5rem 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.footer .text {
+  font: normal normal 1.25rem/1.4 'HelveticaLight';
+  color: #545871;
+  margin-bottom: 0;
+}
+
+.footer .navy-button {
+  padding: 1rem 3rem;
+  font: normal normal 1.25rem 'HelveticaLight';
+  color: white;
+  background-color: #545871;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+}
+
+.review {
+  width: 72rem;
+  margin: 1.5rem auto;
+  height: 34rem;
+  border-radius: 1rem;
+  border: solid 1px lightgray;
+}
+
+.review .logo-container {
+  background-color: white;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: solid 1px lightgray;
+}
+
+.review .logo-container img {
+  width: 15rem;
+  height: 8rem;
+}
+
+.review .interaction {
+  background-color: #f0f1f7;
+  padding: 1rem;
+  height: 19.25rem;
+  border-bottom: solid 1px lightgray;
+}
+
+.review .website {
+  background-color: white;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0 0 1rem 1rem;
+  height: auto;
+}
+
+.review .website .pink-button {
+  padding: 0.75rem 3rem;
+  font: normal normal 1rem 'HelveticaLight';
+  color: #545871;
+  background-color: #f7eceb;
+  border-radius: 2rem;
+  border: solid 1px lightgray;
+  outline: none;
+}
+
+.review .interaction .step-1, 
+.review .interaction .step-2, 
+.review .interaction .step-3 {
+  padding: 1rem 2rem;
+  text-align: center;
+  font: normal normal 1.25rem/1.4 'HelveticaLight';
+  color: #545871;
+}
+
+.review .interaction .step-2 textarea {
+  background-color: white;
+  border: solid 1px black;
+  height: 7.5rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+  resize: none;
+}
+
+.review .interaction .step-2 .navy-button {
+  padding: 0.75rem 2.5rem;
+  font: normal normal 1rem 'HelveticaLight';
+  color: white;
+  background-color: #545871;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+}
+
+.review .interaction .step-3 .share {
+  text-align: center;
+  font: normal normal 3.5rem 'HenrietteBold';
+  color: #545871;
+  margin-bottom: 2rem;
+}
+
+.review .interaction .step-3 .link {
+  font: normal normal 1.25rem/1.4 'HelveticaLight';
+  color: #545871;
+  text-decoration: underline;
+}
+
+@media only screen 
+  and (min-device-width: 300px) 
+  and (max-device-width: 450px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .wrapper {
+      padding: 4rem 3rem;
+    }
+    
+    .wrapper .heading {
+      font: normal normal 3rem 'HenrietteBold';
+      margin-bottom: 2rem;
+    }
+    
+    .footer {
+      background-color: transparent;
+      padding: 4rem 3rem;
+      display: block;
+      text-align: center;
+    }
+    
+    .footer .text {
+      text-align: left;
+      font: normal normal 2rem/1.5 'HelveticaLight';
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer .navy-button {
+      padding: 1.5rem 3.5rem;
+      font: normal normal 1.5rem 'HelveticaLight';
+    }
+    
+    .review {
+      width: 100%;
+      margin: 1.5rem auto;
+      height: 70rem;
+    }
+    
+    .review .logo-container {
+      padding: 4rem;
+    }
+    
+    .review .logo-container img {
+      width: 22rem;
+      height: 11rem;
+    }
+    
+    .review .interaction {
+      padding: 1rem;
+      height: 40.65rem;
+    }
+    
+    .review .website {
+      padding: 3rem;
+    }
+    
+    .review .website .pink-button {
+      padding: 1.25rem 5.5rem;
+      font: normal normal 1.5rem 'HelveticaLight';
+    }
+
+    .review .interaction .step-1, 
+    .review .interaction .step-2,
+    .review .interaction .step-3 {
+      padding: 10rem 2rem;
+    }
+
+    .review .interaction .step-1 p {
+      width: 40rem;
+      margin: auto;
+      margin-bottom: 2rem;
+    }
+
+    .review .interaction .step-2 p {
+      width: 30rem;
+      margin: auto;
+      margin-bottom: 2rem;
+    }
+}

@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'HenrietteBold';
+  src: local('HenrietteBold'), url(../assets/henriette/HenrietteBold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'HenrietteRegular';
+  src: local('HenrietteRegular'), url(../assets/henriette/HenrietteRegular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'HelveticaLight';
+  src: local('HelveticaLight'), url(../assets/helvetica/HelveticaLight.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'HelveticaMedium';
+  src: local('HelveticaMedium'), url(../assets/helvetica/HelveticaMedium.ttf) format('truetype');
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: #f7eceb;
+  font-family: 'HenrietteRegular', sans-serif;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none !important;
+}
