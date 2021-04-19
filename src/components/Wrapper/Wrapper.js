@@ -32,7 +32,6 @@ const Wrapper = () => {
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "data");
         const errMsg = "Something went wrong. Please try again later.";
 
         if (data.statusCode !== 200) {

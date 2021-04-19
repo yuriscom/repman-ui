@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 // styles
 import "./style.scss";
@@ -14,6 +14,7 @@ const ThirdStep = () => (
     <a
       href="https://www.google.com/search?client=safari&rls=en&q=wilderman+cosmetic+clinic+
 reviews&ie=UTF-8&oe=UTF-8#Ird=0x882b2c62b4a1fb05:0x4cffO2cc3b85afa0,1"
+      target="blank"
     >
       <p className="link">
         https://www.google.com/search?client=safari&rls=en&q=wilderman+cosmetic+clinic+

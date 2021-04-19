@@ -25,14 +25,16 @@
 
 .second-step {
   textarea {
-    padding-top: 1rem;
-    padding-left: 1rem;
+    font-size: 1.1rem;
+    padding: 0.5rem;
     background-color: $white;
     border: solid 1px black;
     height: 7.5rem;
     margin-bottom: 1rem;
     width: 100%;
     resize: none;
+    border-color: lightgray;
+    border-radius: 5px;
   }
 
   .submit-button {
@@ -51,6 +53,7 @@
     text-align: center;
     font: normal bold 3rem "HenrietteBold" !important;
     color: $dark-blue;
+    margin: 0rem !important;
   }
 
   .link {
@@ -83,8 +86,6 @@
   .second-step {
     textarea {
       width: 90%;
-      border-radius: 10px;
-      border-color: lightgray;
     }
 
     .submit-button {
@@ -103,9 +104,3 @@
     height: 1.5rem !important;
   }
 }
-
-// @media only screen and (min-device-width: 300px) and (max-device-width: 450px) and (-webkit-min-device-pixel-ratio: 2) {
-//   .step-container {
-//     padding: 10rem 2rem;
-//   }
-// }
