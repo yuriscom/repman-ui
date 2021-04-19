@@ -3,6 +3,5 @@ export const apiConstants = {
   STAR_RATING: '/rating',
   REVIEW: '/rating/review',
   TEST_HASH: '/test/patient',
-  // PHONE_NUMBER: '+11234567890',
-  PHONE_NUMBER: '+14372288183'
+  PHONE_NUMBER: '+11234567890',
 };
