@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
-import StarRatings from 'react-star-ratings';
-import { apiConstants } from '../../api/constants';
+import React, { Component } from "react";
+import StarRatings from "react-star-ratings";
+import { apiConstants } from "../../api/constants";
 
-class Step1 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+// styles
+import "./style.scss";
 
+class FirstStep extends Component {
   changeRating = (newRating) => {
     // send star rating
     const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("Content-Type", "application/json");
 
     const raw = JSON.stringify({ rating: newRating });
 
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: raw,
     };
@@ -26,10 +24,10 @@ class Step1 extends Component {
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        const errMsg = 'Something went wrong. Please try again later.';
+        const errMsg = "Something went wrong. Please try again later.";
 
         if (data.statusCode !== 200) {
-          const error = (data.error) || errMsg;
+          const error = data.error || errMsg;
           return Promise.reject(error);
         }
         if (true) {
@@ -40,18 +38,22 @@ class Step1 extends Component {
           alert(errMsg);
         }
       });
-  }
+  };
 
   render() {
     return (
-      <div className="step-1">
-        <p>We are always looking for ways to improve the quality of our products, services, and customer support. If you have a moment, we would appreciate if you could share your experience with us.</p>
+      <div className="step-container">
+        <p className="description">
+          We are always looking for ways to improve the quality of our products,
+          services, and customer support. If you have a moment, we would
+          appreciate if you could share your experience with us.
+        </p>
         <StarRatings
           rating={this.props.newRating}
           starRatedColor="#f4cc1c"
           changeRating={this.changeRating}
           numberOfStars={5}
-          starDimension="9rem"
+          /* starDimension="9rem" */
           starSpacing="0.3rem"
           starHoverColor="#f4cc1c"
         />
@@ -60,4 +62,4 @@ class Step1 extends Component {
   }
 }
 
-export default Step1;
+export default FirstStep;

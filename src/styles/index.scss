@@ -1,0 +1,54 @@
+// /* Fonts */
+
+// @font-face {
+//   font-family: "HenrietteBold";
+//   src: local("HenrietteBold"),
+//     url(../assets/henriette/HenrietteBold.woff) format("woff");
+// }
+
+// @font-face {
+//   font-family: "HenrietteRegular";
+//   src: local("HenrietteRegular"),
+//     url(../assets/henriette/HenrietteRegular.woff) format("woff");
+// }
+
+// @font-face {
+//   font-family: "HelveticaLight";
+//   src: local("HelveticaLight"),
+//     url(../assets/helvetica/HelveticaLight.ttf) format("truetype");
+// }
+
+// @font-face {
+//   font-family: "HelveticaMedium";
+//   src: local("HelveticaMedium"),
+//     url(../assets/helvetica/HelveticaMedium.ttf) format("truetype");
+// }
+
+html,
+body {
+  background: #f7eceb;
+  font-family: "HenrietteRegular", sans-serif;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  margin: 0;
+  // overflow: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+h1 {
+  font-size: 3rem !important;
+}
+
+/* Common styles */
+
+.pointer {
+  cursor: pointer !important;
+}

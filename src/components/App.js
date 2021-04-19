@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
 import Wrapper from "./Wrapper/Wrapper";
+
+// styles
+// import "./index.scss";
+import '../styles/index.scss';
 
 const App = () => (
   <Router>

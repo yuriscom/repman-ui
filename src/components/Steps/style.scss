@@ -1,0 +1,111 @@
+@import "../../styles/variables.scss";
+
+.step-container {
+  padding: 1rem 2rem;
+  text-align: center;
+  font: normal normal 1.25rem/1.4 "HelveticaLight";
+  color: $dark-blue;
+
+  .link {
+    font: normal normal 1.25rem/1.4 "HelveticaLight";
+    color: $dark-blue;
+    text-decoration: underline;
+    word-break: break-all;
+  }
+
+  .description {
+    margin: 1rem;
+  }
+
+  .widget-svg {
+    width: 9rem !important;
+    height: 9rem !important;
+  }
+}
+
+.second-step {
+  textarea {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    background-color: $white;
+    border: solid 1px black;
+    height: 7.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    resize: none;
+  }
+
+  .submit-button {
+    padding: 0.75rem 3rem;
+    font: normal normal 1rem "HelveticaLight";
+    color: $white;
+    background-color: $dark-blue;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+  }
+}
+
+.third-step {
+  .share-review-heading {
+    text-align: center;
+    font: normal bold 3rem "HenrietteBold" !important;
+    color: $dark-blue;
+  }
+
+  .link {
+    font: normal normal 1.25rem/1.4 "HelveticaLight";
+    color: $dark-blue;
+    text-decoration: underline;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .step-container .widget-svg {
+    width: 5rem !important;
+    height: 5rem !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .step-container {
+    padding: 0.5rem;
+    .widget-svg {
+      width: 3rem !important;
+      height: 3rem !important;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      margin: 0.5rem;
+    }
+  }
+
+  .second-step {
+    textarea {
+      width: 90%;
+      border-radius: 10px;
+      border-color: lightgray;
+    }
+
+    .submit-button {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .third-step .share-review-heading {
+    font-size: 2rem !important;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .step-container .widget-svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+}
+
+// @media only screen and (min-device-width: 300px) and (max-device-width: 450px) and (-webkit-min-device-pixel-ratio: 2) {
+//   .step-container {
+//     padding: 10rem 2rem;
+//   }
+// }

@@ -1,0 +1,229 @@
+@import "../../styles/variables.scss";
+
+.page-wrapper {
+  display: table;
+  max-width: $max-container-width;
+  width: 100%;
+  margin: 0 auto;
+  height: calc(100vh - 150px);
+}
+
+.heading-container {
+  display: table-row;
+}
+
+.heading {
+  display: table-cell;
+  vertical-align: bottom;
+  font-family: "HenrietteBold";
+  color: $dark-blue;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+/* review-component component */
+.review-container {
+  display: table-row;
+  vertical-align: middle;
+  padding: 2rem;
+}
+
+.review-component {
+  max-width: 72rem;
+  width: 90%;
+  margin: auto;
+  border: solid 1px lightgray;
+  border-radius: 1rem !important;
+  background-color: $white;
+
+  .logo-container {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: solid 1px lightgrey;
+
+    img {
+      width: 250px;
+      height: 150px;
+    }
+  }
+
+  .interaction {
+    background-color: #f0f1f7;
+    border-bottom: solid 1px lightgray;
+  }
+
+  .website {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .pink-button {
+    padding: 0.75rem 3rem;
+    font: normal normal 1rem "HelveticaLight";
+    color: $dark-blue;
+    background-color: #f7eceb;
+    border-radius: 2rem;
+    border: solid 1px lightgray;
+    outline: none;
+  }
+}
+
+/* Footer */
+
+.footer {
+  height: 120px;
+  margin-top: 30px;
+  background-color: $white;
+  box-shadow: 5px 1px 5px rgb(34 36 38 / 15%);
+}
+
+.footer-content-container {
+  max-width: $max-container-width;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  padding-top: 1rem;
+
+  .text {
+    font: normal normal 1.25rem/1.4 "HelveticaLight";
+    color: $dark-blue;
+  }
+
+  .navy-button {
+    padding: 1rem 3rem;
+    font: normal normal 1.25rem "HelveticaLight";
+    color: $white;
+    background-color: $dark-blue;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .footer-content-container {
+    .text,
+    .navy-button {
+      font-size: 1rem;
+    }
+
+    .navy-button {
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .page-wrapper {
+    height: 100%;
+    padding-top: 1.5rem;
+  }
+
+  .heading {
+    font-size: 2rem !important;
+  }
+
+  .footer {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .footer-content-container {
+    flex-direction: column !important;
+    justify-content: flex-start;
+
+    .text {
+      text-align: left;
+      width: 100%;
+      padding-left: 5rem;
+    }
+
+    .navy-button {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      padding: 1rem 3rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .review-component .logo-container {
+    padding: 0 !important;
+  }
+
+  .footer-content-container .text {
+    padding-left: 2rem;
+  }
+}
+
+// @media only screen and (min-device-width: 300px) and (max-device-width: 450px) and (-webkit-min-device-pixel-ratio: 2) {
+//   .wrapper {
+//     padding: 4rem 3rem;
+//   }
+
+//   .wrapper .heading {
+//     font: normal normal 3rem "HenrietteBold";
+//     margin-bottom: 2rem;
+//   }
+
+//   .footer {
+//     background-color: transparent;
+//     padding: 4rem 3rem;
+//     display: block;
+//     text-align: center;
+//   }
+
+//   .footer .text {
+//     text-align: left;
+//     font: normal normal 2rem/1.5 "HelveticaLight";
+//     margin-bottom: 1.5rem;
+//   }
+
+//   .footer .navy-button {
+//     padding: 1.5rem 3.5rem;
+//     font: normal normal 1.5rem "HelveticaLight";
+//   }
+
+//   .review-component {
+//     width: 100%;
+//     margin: 1.5rem auto;
+//     height: 70rem;
+//   }
+
+//   .review-component .logo-container {
+//     padding: 4rem;
+//   }
+
+//   .review-component .logo-container img {
+//     width: 22rem;
+//     height: 11rem;
+//   }
+
+//   .review-component .interaction {
+//     padding: 1rem;
+//     height: 40.65rem;
+//   }
+
+//   .review-component .website {
+//     padding: 3rem;
+//   }
+
+//   .review-component .website .pink-button {
+//     padding: 1.25rem 5.5rem;
+//     font: normal normal 1.5rem "HelveticaLight";
+//   }
+
+//   .review-component .interaction .step-1 p {
+//     width: 40rem;
+//     margin: auto;
+//     margin-bottom: 2rem;
+//   }
+
+//   .review-component .interaction .step-2 p {
+//     width: 30rem;
+//     margin: auto;
+//     margin-bottom: 2rem;
+//   }
+// }
