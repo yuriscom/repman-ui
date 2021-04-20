@@ -53,7 +53,6 @@ class FirstStep extends Component {
           starRatedColor="#f4cc1c"
           changeRating={this.changeRating}
           numberOfStars={5}
-          /* starDimension="9rem" */
           starSpacing="0.3rem"
           starHoverColor="#f4cc1c"
         />
