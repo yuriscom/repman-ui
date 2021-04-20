@@ -24,10 +24,15 @@ class FirstStep extends Component {
 
     fetch(url, requestOptions)
       .then((res) => res.json())
-      .then((data) => {
+      .then(({ statusCode, data, error }) => {
+        console.log(data, "data");
+        console.log(this.props, "this.props");
+        if (statusCode !== 200) {
+          return errorAlert(error || errMsg);
+        }
         this.props.setRating(newRating);
         this.props.setActiveStep(2);
-        this.props.setHash(data.data.hash);
+        this.props.setHash(data.hash);
       })
       .catch((error) => errorAlert(error));
   };

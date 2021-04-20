@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FirstStep, SecondStep, ThirdStep } from "../Steps";
-import { apiConstants } from "../../api/constants";
-import { errorAlert } from "../../utils";
+// import { apiConstants } from "../../api/constants";
+// import { errorAlert } from "../../utils";
+import { useLocation } from "react-router";
 
 // styles
 import "./style.scss";
 
 // assets
 import logo from "../../assets/logo.png";
-import { useLocation } from "react-router";
 
 const Wrapper = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -21,29 +21,29 @@ const Wrapper = () => {
   // Get initial hash
   useEffect(() => {
     // read hash from the url
-    // if (location && location.pathname) {
-    //   setHash(location.pathname.slice(1));
-    // }
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    const raw = JSON.stringify({ phoneNumber: apiConstants.PHONE_NUMBER });
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
-    const url = `${apiConstants.BASE_URL}${apiConstants.TEST_HASH}`;
-    fetch(url, requestOptions)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.statusCode !== 200) {
-          return errorAlert(data.error);
-        } else {
-          // set state hash variable
-          setHash(data.data.hash);
-        }
-      })
-      .catch((error) => errorAlert(error));
+    if (location && location.pathname) {
+      setHash(location.pathname.slice(1));
+    }
+    // const myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+    // const raw = JSON.stringify({ phoneNumber: apiConstants.PHONE_NUMBER });
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: myHeaders,
+    //   body: raw,
+    // };
+    // const url = `${apiConstants.BASE_URL}${apiConstants.TEST_HASH}`;
+    // fetch(url, requestOptions)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.statusCode !== 200) {
+    //       return errorAlert(data.error);
+    //     } else {
+    //       // set state hash variable
+    //       setHash(data.data.hash);
+    //     }
+    //   })
+    //   .catch((error) => errorAlert(error));
   }, []);
   // Get initial hash
 
