@@ -23,12 +23,13 @@
   }
 }
 
+/* Second Step */
 .second-step {
   textarea {
     font-size: 1.1rem;
     padding: 0.5rem;
     background-color: $white;
-    border: solid 1px black;
+    border: solid 1px $black;
     height: 7.5rem;
     margin-bottom: 1rem;
     width: 100%;
@@ -48,6 +49,7 @@
   }
 }
 
+/* Third Step */
 .third-step {
   .share-review-heading {
     text-align: center;

@@ -5,3 +5,5 @@ export const DEFAULT_ERROR_MESSAGE =
 
 export const RECEIVE_ALERT_TEXT =
   "We have received your review and we're looking into it!";
+
+export const FEEDBACK_MIN_LENGTH = 10;

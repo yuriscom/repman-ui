@@ -6,7 +6,7 @@ export const errorAlert = (message) => {
     icon: "error",
     title: "Oops...",
     text: message ?? DEFAULT_ERROR_MESSAGE,
-    timer: 4000,
+    timer: 5000,
     timerProgressBar: true,
   });
 };
@@ -16,7 +16,7 @@ export const confirmAlert = (title, message) => {
     icon: "success",
     title,
     text: message ?? DEFAULT_ERROR_MESSAGE,
-    timer: 4000,
+    timer: 5000,
     timerProgressBar: true,
   });
 };

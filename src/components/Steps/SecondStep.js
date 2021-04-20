@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { apiConstants } from "../../api/constants";
-import { RECEIVE_ALERT_TEXT } from "../../constans";
+import { RECEIVE_ALERT_TEXT, FEEDBACK_MIN_LENGTH } from "../../constans";
 import { confirmAlert } from "../../utils";
 
 // styles
@@ -34,10 +34,6 @@ class SecondStep extends Component {
           return Promise.reject(error);
         }
 
-        // alert(
-        //   `We have received your review and we're looking into it! Your reference no. is ${data.data.referenceNo}`
-        // );
-
         confirmAlert(
           `Your reference no. is ${data.data.referenceNo}`,
           RECEIVE_ALERT_TEXT
@@ -51,6 +47,10 @@ class SecondStep extends Component {
   };
 
   render() {
+    console.log(this.props, "this.props");
+    const { review } = this.props;
+
+    const submitButtonDisabled = review.length < FEEDBACK_MIN_LENGTH;
     return (
       <div className="step-container second-step">
         <p>
@@ -60,13 +60,24 @@ class SecondStep extends Component {
           Your feedback is valuable for us!
         </p>
         <textarea onChange={this.handleChange} />
-        <button
-          type="button"
-          className="submit-button pointer"
-          onClick={this.handleSubmit}
-        >
-          Submit Feedback
-        </button>
+        <div className="tooltip">
+          <button
+            type="button"
+            className={`submit-button ${
+              submitButtonDisabled ? "disabled-button" : "pointer"
+            }`}
+            disabled={submitButtonDisabled}
+            onClick={this.handleSubmit}
+          >
+            Submit Feedback
+            {submitButtonDisabled && (
+              <span className="tooltip-text">
+                Please make sure you typed out more than 10 characters to be
+                able to send your feedback.
+              </span>
+            )}
+          </button>
+        </div>
       </div>
     );
   }

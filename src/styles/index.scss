@@ -1,28 +1,30 @@
-// /* Fonts */
+@import "./variables.scss";
 
-// @font-face {
-//   font-family: "HenrietteBold";
-//   src: local("HenrietteBold"),
-//     url(../assets/henriette/HenrietteBold.woff) format("woff");
-// }
+/* Fonts */
 
-// @font-face {
-//   font-family: "HenrietteRegular";
-//   src: local("HenrietteRegular"),
-//     url(../assets/henriette/HenrietteRegular.woff) format("woff");
-// }
+@font-face {
+  font-family: "HenrietteBold";
+  src: local("HenrietteBold"),
+    url(../assets/henriette/HenrietteBold.woff) format("woff");
+}
 
-// @font-face {
-//   font-family: "HelveticaLight";
-//   src: local("HelveticaLight"),
-//     url(../assets/helvetica/HelveticaLight.ttf) format("truetype");
-// }
+@font-face {
+  font-family: "HenrietteRegular";
+  src: local("HenrietteRegular"),
+    url(../assets/henriette/HenrietteRegular.woff) format("woff");
+}
 
-// @font-face {
-//   font-family: "HelveticaMedium";
-//   src: local("HelveticaMedium"),
-//     url(../assets/helvetica/HelveticaMedium.ttf) format("truetype");
-// }
+@font-face {
+  font-family: "HelveticaLight";
+  src: local("HelveticaLight"),
+    url(../assets/helvetica/HelveticaLight.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "HelveticaMedium";
+  src: local("HelveticaMedium"),
+    url(../assets/helvetica/HelveticaMedium.ttf) format("truetype");
+}
 
 html,
 body {
@@ -51,4 +53,38 @@ h1 {
 
 .pointer {
   cursor: pointer !important;
+}
+
+.disabled-button {
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+}
+
+/* Tooltip */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  opacity: 1 !important;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: $black;
+  color: $white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  opacity: 1 !important;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 50%;
+  margin-left: -60px;
+}
+.tooltip:hover .tooltip-text {
+  visibility: visible;
 }

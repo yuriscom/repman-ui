@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FirstStep, SecondStep, ThirdStep } from "../Steps";
 import { apiConstants } from "../../api/constants";
+import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
 
 // assets
 import logo from "../../assets/logo.png";
-import { DEFAULT_ERROR_MESSAGE } from "../../constans";
-import { errorAlert } from "../../utils";
 
 const Wrapper = () => {
   const [activeStep, setActiveStep] = useState(1);
