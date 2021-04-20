@@ -47,7 +47,6 @@ class SecondStep extends Component {
   };
 
   render() {
-    console.log(this.props, "this.props");
     const { review } = this.props;
 
     const submitButtonDisabled = review.length < FEEDBACK_MIN_LENGTH;
