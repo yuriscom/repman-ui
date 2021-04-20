@@ -7,6 +7,8 @@ import "./style.scss";
 
 // assets
 import logo from "../../assets/logo.png";
+import { DEFAULT_ERROR_MESSAGE } from "../../constans";
+import { errorAlert } from "../../utils";
 
 const Wrapper = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -32,15 +34,14 @@ const Wrapper = () => {
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        const errMsg = "Something went wrong. Please try again later.";
-
         if (data.statusCode !== 200) {
-          const error = data.error || errMsg;
-          return Promise.reject(error);
+          return errorAlert(data.error);
+        } else {
+          // set state hash variable
+          setHash(data.data.hash);
         }
-        // set state hash variable
-        setHash(data.data.hash);
-      });
+      })
+      .catch((error) => errorAlert(error));
   }, []);
   // Get initial hash
 

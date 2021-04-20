@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { apiConstants } from "../../api/constants";
+import { RECEIVE_ALERT_TEXT } from "../../constans";
+import { confirmAlert } from "../../utils";
 
 // styles
 import "./style.scss";
@@ -32,8 +34,13 @@ class SecondStep extends Component {
           return Promise.reject(error);
         }
 
-        alert(
-          `We have received your review and we're looking into it! Your reference no. is ${data.data.referenceNo}`
+        // alert(
+        //   `We have received your review and we're looking into it! Your reference no. is ${data.data.referenceNo}`
+        // );
+
+        confirmAlert(
+          `Your reference no. is ${data.data.referenceNo}`,
+          RECEIVE_ALERT_TEXT
         );
         this.props.setActiveStep(3);
       });
