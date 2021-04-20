@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FirstStep, SecondStep, ThirdStep } from "../Steps";
-// import { apiConstants } from "../../api/constants";
-// import { errorAlert } from "../../utils";
+import { apiConstants } from "../../api/constants";
+import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
