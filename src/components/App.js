@@ -9,8 +9,8 @@ import '../styles/index.scss';
 const App = () => (
   <Router>
     <Switch>
-      <Route exact path="/" component={Wrapper} />
-      <Route path="*" component={Wrapper} />
+      <Route exact path="/:" component={Wrapper} />
+      <Route path="/*" component={Wrapper} />
     </Switch>
   </Router>
 );
