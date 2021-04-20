@@ -44,16 +44,15 @@ class FirstStep extends Component {
     return (
       <div className="step-container">
         <p className="description">
-          We are always looking for ways to improve the quality of our products,
+          {/* We are always looking for ways to improve the quality of our products,
           services, and customer support. If you have a moment, we would
-          appreciate if you could share your experience with us.
+          appreciate if you could share your experience with us. */}
         </p>
         <StarRatings
           rating={this.props.newRating}
           starRatedColor="#f4cc1c"
           changeRating={this.changeRating}
           numberOfStars={5}
-          /* starDimension="9rem" */
           starSpacing="0.3rem"
           starHoverColor="#f4cc1c"
         />
