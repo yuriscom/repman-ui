@@ -24,6 +24,8 @@ const Wrapper = () => {
     if (location && location.pathname) {
       setHash(location.pathname.slice(1));
     }
+
+    /* TEST */
     // const myHeaders = new Headers();
     // myHeaders.append("Content-Type", "application/json");
     // const raw = JSON.stringify({ phoneNumber: apiConstants.PHONE_NUMBER });

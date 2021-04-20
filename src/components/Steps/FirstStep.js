@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StarRatings from "react-star-ratings";
 import { apiConstants } from "../../api/constants";
+import { DEFAULT_ERROR_MESSAGE } from "../../constans";
 import { errorAlert } from "../../utils";
 
 // styles
@@ -24,15 +25,13 @@ class FirstStep extends Component {
 
     fetch(url, requestOptions)
       .then((res) => res.json())
-      .then(({ statusCode, data, error }) => {
-        console.log(data, "data");
-        console.log(this.props, "this.props");
-        if (statusCode !== 200) {
-          return errorAlert(error || errMsg);
+      .then((data) => {
+        if (data.statusCode !== 200) {
+          return errorAlert(data.error || DEFAULT_ERROR_MESSAGE);
         }
         this.props.setRating(newRating);
         this.props.setActiveStep(2);
-        this.props.setHash(data.hash);
+        this.props.setHash(data.data.hash);
       })
       .catch((error) => errorAlert(error));
   };
