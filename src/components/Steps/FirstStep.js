@@ -44,8 +44,8 @@ class FirstStep extends Component {
     return (
       <div className="step-container">
         <p className="description">
-          {/* We are always looking for ways to improve the quality of our products,
-          services, and customer support. If you have a moment, we would */}
+          We are always looking for ways to improve the quality of our products,
+          services, and customer support. If you have a moment, we would
           appreciate if you could share your experience with us.
         </p>
         <StarRatings
