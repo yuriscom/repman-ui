@@ -33,7 +33,7 @@ const Wrapper = () => {
     //   headers: myHeaders,
     //   body: raw,
     // };
-    // const url = `${process.env.REACT_APP_BASE_URL}${TEST_HASH_API}`;
+    // const url = `${BASE_URL}${TEST_HASH_API}`;
     // fetch(url, requestOptions)
     //   .then((res) => res.json())
     //   .then((data) => {

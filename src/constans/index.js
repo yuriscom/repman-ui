@@ -1,6 +1,8 @@
 /* Constants that are shared across app */
 
 /* API */
+export const BASE_URL =
+  "http://ec2-18-207-112-127.compute-1.amazonaws.com:8080";
 export const STAR_RATING_API = "/rating";
 export const REVIEW_API = "/rating/review";
 export const ACKNOWLEDGE_RATING_API = "/rating/ack";

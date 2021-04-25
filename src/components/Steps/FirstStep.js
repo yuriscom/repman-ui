@@ -1,6 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import {
+  BASE_URL,
   DEFAULT_ERROR_MESSAGE,
   RATE_STEPS,
   REVIEW_LINK_IDENTIFIER,
@@ -41,7 +42,7 @@ const FirstStep = ({
       body: raw,
     };
 
-    const url = `${process.env.REACT_APP_BASE_URL}${STAR_RATING_API}?hash=${hash}`;
+    const url = `${BASE_URL}${STAR_RATING_API}?hash=${hash}`;
 
     fetch(url, requestOptions)
       .then((res) => res.json())
