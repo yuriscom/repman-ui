@@ -1,6 +1,7 @@
 import React from "react";
 import {
   ACKNOWLEDGE_RATING_API,
+  BASE_URL,
   INIT_USER_RATE,
   RATE_STEPS,
 } from "../../constans";
@@ -20,7 +21,7 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
       headers: myHeaders,
     };
 
-    const url = `${process.env.REACT_APP_BASE_URL}${ACKNOWLEDGE_RATING_API}?hash=${hash}`;
+    const url = `${BASE_URL}${ACKNOWLEDGE_RATING_API}?hash=${hash}`;
 
     fetch(url, requestOptions)
       .then((res) => res.json())

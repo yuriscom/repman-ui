@@ -5,6 +5,7 @@ import {
   RATE_STEPS,
   INIT_USER_RATE,
   REVIEW_API,
+  BASE_URL,
 } from "../../constans";
 import { confirmAlert, errorAlert } from "../../utils";
 
@@ -24,7 +25,7 @@ const NegativeRateStep = ({ hash, setActiveStep, setUserRate }) => {
       body: JSON.stringify({ review }),
     };
 
-    const url = `${process.env.REACT_APP_BASE_URL}${REVIEW_API}?hash=${hash}`;
+    const url = `${BASE_URL}${REVIEW_API}?hash=${hash}`;
 
     fetch(url, requestOptions)
       .then((res) => res.json())
