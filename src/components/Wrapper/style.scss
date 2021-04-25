@@ -12,7 +12,6 @@
   display: table-row;
 }
 
-
 .heading {
   display: table-cell;
   vertical-align: bottom;
@@ -103,7 +102,7 @@
   }
 }
 
-@media only screen and (max-width: 991px) {
+@media screen and (max-width: 991px) {
   .footer-content-container {
     .text,
     .navy-button {
@@ -116,7 +115,7 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .page-wrapper {
     height: 100%;
     padding-top: 1.5rem;
@@ -149,7 +148,7 @@
   }
 }
 
-@media only screen and (max-width: 390px) {
+@media screen and (max-width: 390px) {
   .review-component .logo-container {
     padding: 0 !important;
   }
