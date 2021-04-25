@@ -3,7 +3,7 @@ import React from "react";
 // styles
 import "./style.scss";
 
-const ThirdStep = () => (
+const ThirdStep = ({ reviewLink }) => (
   <div className="step-container third-step">
     <p>
       We are so happy you had a great experience!
@@ -12,8 +12,9 @@ const ThirdStep = () => (
     </p>
     <h2 className="share-review-heading">Share your review!</h2>
     <a
-      href="https://www.google.com/search?client=safari&rls=en&q=wilderman+cosmetic+clinic+
-reviews&ie=UTF-8&oe=UTF-8#Ird=0x882b2c62b4a1fb05:0x4cffO2cc3b85afa0,1"
+      /* href="https://www.google.com/search?client=safari&rls=en&q=wilderman+cosmetic+clinic+
+reviews&ie=UTF-8&oe=UTF-8#Ird=0x882b2c62b4a1fb05:0x4cffO2cc3b85afa0,1" */
+      href={reviewLink}
       target="blank"
     >
       <p className="link">

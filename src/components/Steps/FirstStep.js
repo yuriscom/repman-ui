@@ -29,9 +29,11 @@ class FirstStep extends Component {
         if (data.statusCode !== 200) {
           return errorAlert(data.error || DEFAULT_ERROR_MESSAGE);
         }
+
         this.props.setRating(newRating);
         this.props.setActiveStep(2);
         this.props.setHash(data.data.hash);
+        this.props.setReviewLink(data.data.reviewLink);
       })
       .catch((error) => errorAlert(error));
   };

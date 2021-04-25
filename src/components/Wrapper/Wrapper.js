@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FirstStep, SecondStep, ThirdStep } from "../Steps";
-// import { apiConstants } from "../../api/constants";
-// import { errorAlert } from "../../utils";
+import { apiConstants } from "../../api/constants";
+import { errorAlert } from "../../utils";
 import { useLocation } from "react-router";
 
 // styles
@@ -14,47 +14,49 @@ const Wrapper = () => {
   const [activeStep, setActiveStep] = useState(1);
   const [newRating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const [reviewLink, setReviewLink] = useState("");
   const [hash, setHash] = useState();
 
-  const location = useLocation();
+  // const location = useLocation();
 
   // Get initial hash
   useEffect(() => {
     // read hash from the url
-    if (location && location.pathname) {
-      setHash(location.pathname.slice(1));
-    }
+    // if (location && location.pathname) {
+    //   setHash(location.pathname.slice(1));
+    // }
 
     /* TEST */
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // const raw = JSON.stringify({ phoneNumber: apiConstants.PHONE_NUMBER });
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: myHeaders,
-    //   body: raw,
-    // };
-    // const url = `${apiConstants.BASE_URL}${apiConstants.TEST_HASH}`;
-    // fetch(url, requestOptions)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.statusCode !== 200) {
-    //       return errorAlert(data.error);
-    //     } else {
-    //       // set state hash variable
-    //       setHash(data.data.hash);
-    //     }
-    //   })
-    //   .catch((error) => errorAlert(error));
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const raw = JSON.stringify({ phoneNumber: apiConstants.PHONE_NUMBER });
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+    const url = `${apiConstants.BASE_URL}${apiConstants.TEST_HASH}`;
+    fetch(url, requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.statusCode !== 200) {
+          return errorAlert(data.error);
+        } else {
+          // set state hash variable
+          setHash(data.data.hash);
+        }
+      })
+      .catch((error) => errorAlert(error));
   }, []);
   // Get initial hash
 
   let activeStepComponent = (
     <FirstStep
       newRating={newRating}
+      hash={hash}
       setRating={setRating}
       setActiveStep={setActiveStep}
-      hash={hash}
+      setReviewLink={setReviewLink}
       setHash={setHash}
     />
   );
@@ -67,6 +69,7 @@ const Wrapper = () => {
           setRating={setRating}
           setActiveStep={setActiveStep}
           hash={hash}
+          setReviewLink={setReviewLink}
           setHash={setHash}
         />
       );
@@ -82,7 +85,7 @@ const Wrapper = () => {
       );
       break;
     case 3:
-      activeStepComponent = <ThirdStep />;
+      activeStepComponent = <ThirdStep reviewLink={reviewLink} />;
       break;
     default:
       activeStepComponent = (
@@ -91,6 +94,7 @@ const Wrapper = () => {
           setRating={setRating}
           setActiveStep={setActiveStep}
           hash={hash}
+          setReviewLink={setReviewLink}
           setHash={setHash}
         />
       );
