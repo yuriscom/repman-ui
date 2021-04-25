@@ -1,5 +1,5 @@
 import FirstStep from "./FirstStep";
-import SecondStep from "./SecondStep";
-import ThirdStep from "./ThirdStep";
+import NegativeRateStep from "./NegativeRateStep";
+import PositiveRateStep from "./PositiveRateStep";
 
-export { FirstStep, SecondStep, ThirdStep };
+export { FirstStep, NegativeRateStep, PositiveRateStep };

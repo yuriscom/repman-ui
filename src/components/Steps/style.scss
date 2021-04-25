@@ -23,8 +23,8 @@
   }
 }
 
-/* Second Step */
-.second-step {
+/* Negative Step */
+.negative-step {
   textarea {
     font-size: 1.1rem;
     padding: 0.5rem;
@@ -49,8 +49,8 @@
   }
 }
 
-/* Third Step */
-.third-step {
+/* Positive Step */
+.positive-step {
   .share-review-heading {
     text-align: center;
     font: normal bold 3rem "HenrietteBold" !important;
@@ -58,7 +58,12 @@
     margin: 0rem !important;
   }
 
-  .link {
+  .redirect-button {
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    display: inline-block;
+    margin-top: 1rem;
     font: normal normal 1.25rem/1.4 "HelveticaLight";
     color: $dark-blue;
     text-decoration: underline;
@@ -85,7 +90,7 @@
     }
   }
 
-  .second-step {
+  .negative-step {
     textarea {
       width: 90%;
     }
@@ -95,7 +100,7 @@
     }
   }
 
-  .third-step .share-review-heading {
+  .positive-step .share-review-heading {
     font-size: 2rem !important;
   }
 }
