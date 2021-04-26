@@ -29,7 +29,7 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
         const errMsg = "Something went wrong. Please try again later.";
 
         if (data.data) {
-          window.open(reviewLink, "_blank");
+          window.open(reviewLink);
         } else {
           return errorAlert(data.error || errMsg);
         }
