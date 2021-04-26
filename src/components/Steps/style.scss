@@ -58,7 +58,7 @@
     margin: 0rem !important;
   }
 
-  .redirect-button {
+  .redirect-link {
     cursor: pointer;
     background: transparent;
     border: 0;
@@ -66,7 +66,7 @@
     margin-top: 1rem;
     font: normal normal 1.25rem/1.4 "HelveticaLight";
     color: $dark-blue;
-    text-decoration: underline;
+    text-decoration: underline !important;
     word-break: break-all;
   }
 }

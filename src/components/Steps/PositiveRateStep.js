@@ -28,9 +28,13 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
       .then((data) => {
         const errMsg = "Something went wrong. Please try again later.";
 
-        if (data.data) {
-          window.open(reviewLink);
-        } else {
+        // if (data.data) {
+        //   window.open(reviewLink);
+        // } else {
+        //   return errorAlert(data.error || errMsg);
+        // }
+
+        if (!data.data) {
           return errorAlert(data.error || errMsg);
         }
 
@@ -49,14 +53,14 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
         We would appreciate it if you could share your review on Google!
       </p>
       <h2 className="share-review-heading">Share your review!</h2>
-      <button
-        href={reviewLink}
+      <a
         target="_blank"
-        className="redirect-button"
+        className="redirect-link"
+        href={reviewLink}
         onClick={() => sendAcknowledgeLinkAndRedirect()}
       >
         {reviewLink}
-      </button>
+      </a>
     </div>
   );
 };
