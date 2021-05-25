@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FirstStep, NegativeRateStep, PositiveRateStep } from "../Steps";
 // import { errorAlert } from "../../utils";
 import { useLocation } from "react-router";
-import { INIT_USER_RATE, RATE_STEPS } from "../../constans";
+import {
+  BASE_URL,
+  CLIENT_WEBSITE_LINK,
+  INIT_USER_RATE,
+  RATE_STEPS,
+  TEST_HASH_API,
+} from "../../constans";
 
 // styles
 import "./style.scss";
@@ -15,8 +21,18 @@ const Wrapper = () => {
   const [userRate, setUserRate] = useState(INIT_USER_RATE);
   const [reviewLink, setReviewLink] = useState("");
   const [hash, setHash] = useState();
+  const [clientWebsite, setClientWebsite] = useState();
 
   const location = useLocation();
+
+  // Get link to client website
+  useEffect(() => {
+    fetch(`${BASE_URL}${CLIENT_WEBSITE_LINK}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then(({ data: { website } }) => setClientWebsite(website));
+  }, []);
 
   // Get initial hash
   useEffect(() => {
@@ -24,10 +40,17 @@ const Wrapper = () => {
     if (location && location.pathname) {
       setHash(location.pathname.slice(1));
     }
+
+    // Get link to client website
+
     /* TEST */
     // const myHeaders = new Headers();
     // myHeaders.append("Content-Type", "application/json");
-    // const raw = JSON.stringify({ phoneNumber: process.env.REACT_APP_TEST_PHONE_NUMBER });
+    // const raw = JSON.stringify({
+    //   phoneNumber:
+    //     // process.env.REACT_APP_TEST_PHONE_NUMBER
+    //     "+14372288183",
+    // });
     // const requestOptions = {
     //   method: "POST",
     //   headers: myHeaders,
@@ -47,6 +70,7 @@ const Wrapper = () => {
     //   .catch((error) => errorAlert(error));
   }, []);
 
+  // console.log(hash, "hash");
   const identifyActiveStepComponent = () => {
     switch (activeStep) {
       case RATE_STEPS.FIRST_STEP:
@@ -54,6 +78,7 @@ const Wrapper = () => {
           <FirstStep
             userRate={userRate}
             hash={hash}
+            clientWebsite={clientWebsite}
             setUserRate={setUserRate}
             setActiveStep={setActiveStep}
             setReviewLink={setReviewLink}
@@ -65,6 +90,7 @@ const Wrapper = () => {
         return (
           <NegativeRateStep
             hash={hash}
+            clientWebsite={clientWebsite}
             setActiveStep={setActiveStep}
             setUserRate={setUserRate}
           />
@@ -76,6 +102,7 @@ const Wrapper = () => {
             reviewLink={reviewLink}
             hash={hash}
             userRate={userRate}
+            clientWebsite={clientWebsite}
             setActiveStep={setActiveStep}
             setUserRate={setUserRate}
           />
@@ -86,6 +113,7 @@ const Wrapper = () => {
           <FirstStep
             userRate={userRate}
             hash={hash}
+            clientWebsite={clientWebsite}
             setUserRate={setUserRate}
             setActiveStep={setActiveStep}
             setReviewLink={setReviewLink}
@@ -109,7 +137,7 @@ const Wrapper = () => {
             </div>
             <div className="interaction">{identifyActiveStepComponent()}</div>
             <div className="website">
-              <a href="https://drwilderman.com/" target="_blank">
+              <a href={clientWebsite} target="_blank">
                 <button type="button" className="pink-button pointer">
                   Visit Our Website
                 </button>

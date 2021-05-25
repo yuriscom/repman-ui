@@ -48,9 +48,11 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
   return (
     <div className="step-container positive-step">
       <p>
-        We are so happy you had a great experience!
+        We are so glad you had a positive experience!
         <br />
         We would appreciate it if you could share your review on Google!
+        <br />
+        Thank you for the feedback!
       </p>
       <h2 className="share-review-heading">Share your review!</h2>
       <a

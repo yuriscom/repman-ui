@@ -15,6 +15,7 @@ import "./style.scss";
 const FirstStep = ({
   userRate,
   hash,
+  clientWebsite,
   setUserRate,
   setActiveStep,
   setHash,
@@ -28,6 +29,8 @@ const FirstStep = ({
           1
       )
     );
+
+  console.log(clientWebsite, "clientWebsite");
 
   const changeRating = (newUserRate) => {
     // send star rating
@@ -48,7 +51,9 @@ const FirstStep = ({
       .then((res) => res.json())
       .then((data) => {
         if (data.statusCode !== 200) {
-          return errorAlert(data.error || DEFAULT_ERROR_MESSAGE);
+          return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
+            window.open(clientWebsite, "_blank")
+          );
         }
 
         setUserRate(newUserRate);
@@ -68,7 +73,12 @@ const FirstStep = ({
 
         setReviewLink(identifyReviewLink(data.data.reviewLink));
       })
-      .catch((error) => errorAlert(error));
+      // .catch((error) => errorAlert(error));
+      .catch(() => {
+        errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
+          window.open(clientWebsite, "_blank")
+        );
+      });
   };
 
   return (

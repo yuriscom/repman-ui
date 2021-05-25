@@ -53,10 +53,10 @@ const NegativeRateStep = ({ hash, setActiveStep, setUserRate }) => {
   return (
     <div className="step-container negative-step">
       <p>
-        Why did you choose that score?
+        We are sorry to hear that.
         <br />
-        Tell us about your experience so that we could improve our services.
-        Your feedback is valuable for us!
+        Please tell us what went wrong so that we could improve our services.
+        Your feedback is very important to us!
       </p>
       <textarea
         value={review}
