@@ -27,10 +27,7 @@ const Wrapper = () => {
 
   const location = useLocation();
 
-  const redirectToTheClientWebsite = (error = undefined) =>
-    errorAlert(error || DEFAULT_ERROR_MESSAGE).then(() =>
-      window.open(clientWebsite, "_self")
-    );
+  const redirectToTheClientWebsite = () => window.open(clientWebsite, "_self");
 
   const validateHash = (hash) =>
     fetch(`${BASE_URL}${STEP_API}?hash=${hash}`, {
@@ -56,7 +53,7 @@ const Wrapper = () => {
         setHash(hash);
         validateHash(hash).then(({ statusCode, error, data: { step } }) => {
           if (statusCode !== 200) {
-            return redirectToTheClientWebsite(error);
+            return redirectToTheClientWebsite();
           }
           setActivePage(step);
         });
@@ -70,7 +67,7 @@ const Wrapper = () => {
     // validate hash first
     validateHash(hash).then(({ statusCode, error, data: { step } }) => {
       if (statusCode !== 200) {
-        return redirectToTheClientWebsite(error);
+        return redirectToTheClientWebsite();
       }
       setActivePage(step);
     });

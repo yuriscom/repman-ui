@@ -4,7 +4,6 @@ import { ALERT_PROCESSING_TIME, DEFAULT_ERROR_MESSAGE } from "../constans";
 export const errorAlert = (message) =>
   Swal.fire({
     icon: "error",
-    title: "Oops...",
     text: message ?? DEFAULT_ERROR_MESSAGE,
     timer: ALERT_PROCESSING_TIME,
     timerProgressBar: true,
