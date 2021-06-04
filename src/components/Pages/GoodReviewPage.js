@@ -3,14 +3,14 @@ import {
   ACKNOWLEDGE_RATING_API,
   BASE_URL,
   INIT_USER_RATE,
-  RATE_STEPS,
+  APP_FLOW_PAGES,
 } from "../../constans";
 import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
 
-const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
+const GoodReviewPage = ({ reviewLink, hash, setActivePage, setUserRate }) => {
   const sendAcknowledgeLinkAndRedirect = () => {
     const myHeaders = new Headers();
 
@@ -39,7 +39,7 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
         }
 
         // // set to the first step
-        setActiveStep(RATE_STEPS.FIRST_STEP);
+        setActivePage(APP_FLOW_PAGES.RATE_PAGE);
         setUserRate(INIT_USER_RATE);
       })
       .catch((error) => errorAlert(error));
@@ -67,4 +67,4 @@ const PositiveRateStep = ({ reviewLink, hash, setActiveStep, setUserRate }) => {
   );
 };
 
-export default PositiveRateStep;
+export default GoodReviewPage;

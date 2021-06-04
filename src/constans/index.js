@@ -10,6 +10,7 @@ export const STAR_RATING_API = "/rating";
 export const REVIEW_API = "/rating/review";
 export const ACKNOWLEDGE_RATING_API = "/rating/ack";
 export const TEST_HASH_API = "/test/patient";
+export const STEP_API = "/step";
 
 /* Components */
 export const DEFAULT_ERROR_MESSAGE =
@@ -20,12 +21,13 @@ export const RECEIVE_ALERT_TEXT =
 
 export const INIT_USER_RATE = 0;
 export const FEEDBACK_MIN_LENGTH = 10;
+export const NUMBER_OF_STARS = 5;
 export const REVIEW_LINK_IDENTIFIER = "redirectTo";
 
-export const RATE_STEPS = {
-  FIRST_STEP: "FIRST_STEP",
-  NEGATIVE_RATE_STEP: "NEGATIVE_RATE_STEP",
-  POSITIVE_RATE_STEP: "POSITIVE_RATE_STEP",
+export const APP_FLOW_PAGES = {
+  RATE_PAGE: "RATE_PAGE",
+  BAD_REVIEW_PAGE: "BAD_REVIEW_PAGE",
+  SHARE_GOOD_REVIEW_PAGE: "SHARE_GOOD_REVIEW_PAGE",
 };
 
-export const ALERT_PROCESSING_TIME = 5000;
+export const ALERT_PROCESSING_TIME = 25000;

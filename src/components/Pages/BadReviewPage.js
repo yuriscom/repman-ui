@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   RECEIVE_ALERT_TEXT,
   FEEDBACK_MIN_LENGTH,
-  RATE_STEPS,
+  APP_FLOW_PAGES,
   INIT_USER_RATE,
   REVIEW_API,
   BASE_URL,
@@ -12,7 +12,7 @@ import { confirmAlert, errorAlert } from "../../utils";
 // styles
 import "./style.scss";
 
-const NegativeRateStep = ({ hash, setActiveStep, setUserRate }) => {
+const BadReviewPage = ({ hash, setActivePage, setUserRate }) => {
   const [review, setReview] = useState("");
 
   const handleSubmit = () => {
@@ -25,9 +25,7 @@ const NegativeRateStep = ({ hash, setActiveStep, setUserRate }) => {
       body: JSON.stringify({ review }),
     };
 
-    const url = `${BASE_URL}${REVIEW_API}?hash=${hash}`;
-
-    fetch(url, requestOptions)
+    fetch(`${BASE_URL}${REVIEW_API}?hash=${hash}`, requestOptions)
       .then((res) => res.json())
       .then((data) => {
         const errMsg = "Something went wrong. Please try again later.";
@@ -41,7 +39,7 @@ const NegativeRateStep = ({ hash, setActiveStep, setUserRate }) => {
           RECEIVE_ALERT_TEXT
         ).then(() => {
           // set to the first step
-          setActiveStep(RATE_STEPS.FIRST_STEP);
+          setActivePage(APP_FLOW_PAGES.RATE_PAGE);
           setUserRate(INIT_USER_RATE);
         });
       })
@@ -84,4 +82,4 @@ const NegativeRateStep = ({ hash, setActiveStep, setUserRate }) => {
   );
 };
 
-export default NegativeRateStep;
+export default BadReviewPage;

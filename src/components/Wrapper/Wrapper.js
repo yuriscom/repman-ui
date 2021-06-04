@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FirstStep, NegativeRateStep, PositiveRateStep } from "../Steps";
+import { RatePage, BadReviewPage, GoodReviewPage } from "../Pages";
 // import { errorAlert } from "../../utils";
 import { useLocation } from "react-router";
 import {
   BASE_URL,
   CLIENT_WEBSITE_LINK,
+  DEFAULT_ERROR_MESSAGE,
   INIT_USER_RATE,
-  RATE_STEPS,
-  TEST_HASH_API,
+  APP_FLOW_PAGES,
+  STEP_API,
 } from "../../constans";
+import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
@@ -17,13 +19,23 @@ import "./style.scss";
 import logo from "../../assets/logo.png";
 
 const Wrapper = () => {
-  const [activeStep, setActiveStep] = useState(RATE_STEPS.FIRST_STEP);
+  const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
   const [userRate, setUserRate] = useState(INIT_USER_RATE);
   const [reviewLink, setReviewLink] = useState("");
   const [hash, setHash] = useState();
   const [clientWebsite, setClientWebsite] = useState();
 
   const location = useLocation();
+
+  const redirectToTheClientWebsite = (error = undefined) =>
+    errorAlert(error || DEFAULT_ERROR_MESSAGE).then(() =>
+      window.open(clientWebsite, "_self")
+    );
+
+  const validateHash = (hash) =>
+    fetch(`${BASE_URL}${STEP_API}?hash=${hash}`, {
+      method: "GET",
+    }).then((res) => res.json());
 
   // Get link to client website
   useEffect(() => {
@@ -37,85 +49,78 @@ const Wrapper = () => {
   // Get initial hash
   useEffect(() => {
     // read hash from the url
-    if (location && location.pathname) {
-      setHash(location.pathname.slice(1));
+    if (location && location.pathname && clientWebsite) {
+      const hash = location.pathname.slice(1);
+
+      if (hash !== "") {
+        setHash(hash);
+        validateHash(hash).then(({ statusCode, error, data: { step } }) => {
+          if (statusCode !== 200) {
+            return redirectToTheClientWebsite(error);
+          }
+          setActivePage(step);
+        });
+      } else {
+        return redirectToTheClientWebsite();
+      }
     }
+  }, [clientWebsite]);
 
-    // Get link to client website
+  const handleActivePage = () => {
+    // validate hash first
+    validateHash(hash).then(({ statusCode, error, data: { step } }) => {
+      if (statusCode !== 200) {
+        return redirectToTheClientWebsite(error);
+      }
+      setActivePage(step);
+    });
+  };
 
-    /* TEST */
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // const raw = JSON.stringify({
-    //   phoneNumber:
-    //     // process.env.REACT_APP_TEST_PHONE_NUMBER
-    //     "+14372288183",
-    // });
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: myHeaders,
-    //   body: raw,
-    // };
-    // const url = `${BASE_URL}${TEST_HASH_API}`;
-    // fetch(url, requestOptions)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.statusCode !== 200) {
-    //       return errorAlert(data.error);
-    //     } else {
-    //       // set state hash variable
-    //       setHash(data.data.hash);
-    //     }
-    //   })
-    //   .catch((error) => errorAlert(error));
-  }, []);
-
-  // console.log(hash, "hash");
-  const identifyActiveStepComponent = () => {
-    switch (activeStep) {
-      case RATE_STEPS.FIRST_STEP:
+  const identifyactivePageComponent = () => {
+    switch (activePage) {
+      case APP_FLOW_PAGES.RATE_PAGE:
         return (
-          <FirstStep
+          <RatePage
             userRate={userRate}
             hash={hash}
             clientWebsite={clientWebsite}
             setUserRate={setUserRate}
-            setActiveStep={setActiveStep}
+            setActivePage={handleActivePage}
             setReviewLink={setReviewLink}
             setHash={setHash}
           />
         );
 
-      case RATE_STEPS.NEGATIVE_RATE_STEP:
+      case APP_FLOW_PAGES.BAD_REVIEW_PAGE:
         return (
-          <NegativeRateStep
+          <BadReviewPage
             hash={hash}
             clientWebsite={clientWebsite}
-            setActiveStep={setActiveStep}
+            setActivePage={handleActivePage}
             setUserRate={setUserRate}
           />
         );
 
-      case RATE_STEPS.POSITIVE_RATE_STEP:
+      case APP_FLOW_PAGES.SHARE_GOOD_REVIEW_PAGE:
         return (
-          <PositiveRateStep
+          <GoodReviewPage
             reviewLink={reviewLink}
             hash={hash}
             userRate={userRate}
             clientWebsite={clientWebsite}
-            setActiveStep={setActiveStep}
+            setActivePage={handleActivePage}
             setUserRate={setUserRate}
           />
         );
 
       default:
         return (
-          <FirstStep
+          <RatePage
             userRate={userRate}
             hash={hash}
             clientWebsite={clientWebsite}
             setUserRate={setUserRate}
-            setActiveStep={setActiveStep}
+            setActivePage={setActivePage}
             setReviewLink={setReviewLink}
             setHash={setHash}
           />
@@ -135,7 +140,7 @@ const Wrapper = () => {
             <div className="logo-container">
               <img src={logo} alt="logo" />
             </div>
-            <div className="interaction">{identifyActiveStepComponent()}</div>
+            <div className="interaction">{identifyactivePageComponent()}</div>
             <div className="website">
               <a href={clientWebsite} target="_blank">
                 <button type="button" className="pink-button pointer">

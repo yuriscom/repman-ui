@@ -3,21 +3,21 @@ import StarRatings from "react-star-ratings";
 import {
   BASE_URL,
   DEFAULT_ERROR_MESSAGE,
-  RATE_STEPS,
   REVIEW_LINK_IDENTIFIER,
   STAR_RATING_API,
+  NUMBER_OF_STARS,
 } from "../../constans";
 import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
 
-const FirstStep = ({
+const RatePage = ({
   userRate,
   hash,
   clientWebsite,
   setUserRate,
-  setActiveStep,
+  setActivePage,
   setHash,
   setReviewLink,
 }) => {
@@ -29,8 +29,6 @@ const FirstStep = ({
           1
       )
     );
-
-  console.log(clientWebsite, "clientWebsite");
 
   const changeRating = (newUserRate) => {
     // send star rating
@@ -45,40 +43,25 @@ const FirstStep = ({
       body: raw,
     };
 
-    const url = `${BASE_URL}${STAR_RATING_API}?hash=${hash}`;
-
-    fetch(url, requestOptions)
-      .then((res) => res.json())
+    fetch(`${BASE_URL}${STAR_RATING_API}?hash=${hash}`, requestOptions)
+      .then((ratePageResult) => ratePageResult.json())
       .then((data) => {
         if (data.statusCode !== 200) {
           return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-            window.open(clientWebsite, "_blank")
+            window.open(clientWebsite, "_self")
           );
         }
 
         setUserRate(newUserRate);
-
-        /* if user put more than 3 stars,
-           send them to the positive rate page,
-           otherwise, send them to the negative one 
-        */
-
-        const nextStep =
-          newUserRate > 3
-            ? RATE_STEPS.POSITIVE_RATE_STEP
-            : RATE_STEPS.NEGATIVE_RATE_STEP;
-
-        setActiveStep(nextStep);
         setHash(data.data.hash);
-
         setReviewLink(identifyReviewLink(data.data.reviewLink));
+        setActivePage();
       })
-      // .catch((error) => errorAlert(error));
-      .catch(() => {
+      .catch(() =>
         errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-          window.open(clientWebsite, "_blank")
-        );
-      });
+          window.open(clientWebsite, "_self")
+        )
+      );
   };
 
   return (
@@ -92,7 +75,7 @@ const FirstStep = ({
         rating={userRate}
         starRatedColor="#f4cc1c"
         changeRating={changeRating}
-        numberOfStars={5}
+        numberOfStars={NUMBER_OF_STARS}
         starSpacing="0.3rem"
         starHoverColor="#f4cc1c"
       />
@@ -100,4 +83,4 @@ const FirstStep = ({
   );
 };
 
-export default FirstStep;
+export default RatePage;
