@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { RatePage, BadReviewPage, GoodReviewPage } from "../Pages";
-// import { errorAlert } from "../../utils";
 import { useLocation } from "react-router";
 import {
   BASE_URL,
   CLIENT_WEBSITE_LINK,
-  DEFAULT_ERROR_MESSAGE,
   INIT_USER_RATE,
   APP_FLOW_PAGES,
   STEP_API,
+  APPOINTMENT_LINK,
 } from "../../constans";
-import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
@@ -160,10 +158,7 @@ const Wrapper = () => {
             <br />
             +1 (807) 770-1743
           </p>
-          <a
-            href="https://drwilderman.com/request-appointment/"
-            target="_blank"
-          >
+          <a href={`${clientWebsite}${APPOINTMENT_LINK}`} target="_blank">
             <button type="button" className="navy-button pointer">
               Schedule Appointment
             </button>
