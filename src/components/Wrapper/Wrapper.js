@@ -8,6 +8,7 @@ import {
   APP_FLOW_PAGES,
   STEP_API,
   APPOINTMENT_LINK,
+  DEBUG_LINK,
 } from "../../constans";
 
 // styles
@@ -43,8 +44,11 @@ const Wrapper = () => {
 
   // Get initial hash
   useEffect(() => {
-    // read hash from the url
-    if (location && location.pathname && clientWebsite) {
+    if (
+      location?.pathname &&
+      location.pathname !== DEBUG_LINK &&
+      clientWebsite
+    ) {
       const hash = location.pathname.slice(1);
 
       if (hash !== "") {
@@ -63,7 +67,7 @@ const Wrapper = () => {
 
   const handleActivePage = () => {
     // validate hash first
-    validateHash(hash).then(({ statusCode, error, data: { step } }) => {
+    validateHash(hash).then(({ statusCode, data: { step } }) => {
       if (statusCode !== 200) {
         return redirectToTheClientWebsite();
       }

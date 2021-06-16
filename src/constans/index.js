@@ -12,6 +12,7 @@ export const ACKNOWLEDGE_RATING_API = "/rating/ack";
 export const TEST_HASH_API = "/test/patient";
 export const STEP_API = "/step";
 export const APPOINTMENT_LINK = "/contact/#bookappointment";
+export const DEBUG_LINK = "/home";
 /* Components */
 export const DEFAULT_ERROR_MESSAGE =
   "Something went wrong. Please try again later.";
