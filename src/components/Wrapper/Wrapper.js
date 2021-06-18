@@ -66,6 +66,7 @@ const Wrapper = () => {
   }, [clientWebsite]);
 
   const handleActivePage = () => {
+    console.log("HANDLE _ACTIVE_PAGE");
     // validate hash first
     validateHash(hash).then(({ statusCode, data: { step } }) => {
       if (statusCode !== 200) {
@@ -75,7 +76,8 @@ const Wrapper = () => {
     });
   };
 
-  const identifyactivePageComponent = () => {
+  console.log(activePage, "activePage");
+  const identifyActivePageComponent = () => {
     switch (activePage) {
       case APP_FLOW_PAGES.RATE_PAGE:
         return (
@@ -131,7 +133,7 @@ const Wrapper = () => {
     <>
       <div className="page-wrapper">
         <div className="heading-container">
-          <h1 className="heading">Please Rate Us</h1>
+          <h1 className="heading uppercase">Please Rate Us</h1>
         </div>
         {/* Review Container */}
         <div className="review-container">
@@ -139,9 +141,9 @@ const Wrapper = () => {
             <div className="logo-container">
               <img src={logo} alt="logo" />
             </div>
-            <div className="interaction">{identifyactivePageComponent()}</div>
+            <div className="interaction">{identifyActivePageComponent()}</div>
             <div className="website">
-              <a href={clientWebsite} target="_blank">
+              <a href={clientWebsite}>
                 <button type="button" className="pink-button pointer">
                   Visit Our Website
                 </button>

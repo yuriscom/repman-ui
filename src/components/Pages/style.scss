@@ -38,15 +38,26 @@
     border-radius: 5px;
   }
 
-  .submit-button {
-    padding: 0.75rem 3rem;
-    font: normal normal 1rem "HelveticaLight";
-    color: $white;
-    background-color: $dark-blue;
-    border-radius: 2rem;
-    border: none;
-    outline: none;
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
+}
+
+.negative-step__button {
+  padding: 0.75rem 3rem;
+  font: normal normal 1rem "HelveticaLight";
+  color: $white;
+  background-color: $dark-blue;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+}
+
+.negative-step__reviewed-header {
+  display: flex;
+  justify-content: center;
 }
 
 /* Positive Step */
