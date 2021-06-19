@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLongArrowAltRight,
+  faLongArrowAltLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   // RECEIVE_ALERT_TEXT,
   FEEDBACK_MIN_LENGTH,
@@ -17,7 +20,12 @@ import {
 // styles
 import "./style.scss";
 
-const BadReviewPage = ({ hash, setActivePage, setUserRate }) => {
+const BadReviewPage = ({
+  hash,
+  setActivePage,
+  setUserRate,
+  resetActivePage,
+}) => {
   const [review, setReview] = useState("");
   const [isReviewed, setIsReviewed] = useState(false);
 
@@ -34,7 +42,6 @@ const BadReviewPage = ({ hash, setActivePage, setUserRate }) => {
     fetch(`${BASE_URL}${REVIEW_API}?hash=${hash}`, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "data");
         const errMsg = "Something went wrong. Please try again later.";
 
         if (data.statusCode !== 200) {
@@ -57,12 +64,30 @@ const BadReviewPage = ({ hash, setActivePage, setUserRate }) => {
 
   const submitButtonDisabled = review.length < FEEDBACK_MIN_LENGTH;
 
+  const GoBackButton = ({ style }) => (
+    <button
+      type="button"
+      className={`action-button pointer ${style || ""}`}
+      onClick={() => {
+        // set to the first step
+        resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
+        setUserRate(INIT_USER_RATE);
+      }}
+    >
+      <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-1" />
+      Go Back
+    </button>
+  );
+
   return (
     <div className="step-container negative-step">
       {isReviewed ? (
-        <div className="negative-step__reviewed-header mb-2 mt-2">
-          <h1 className="heading">Thank you!</h1>
-        </div>
+        <>
+          <div className="negative-step__reviewed-header">
+            <h1 className="heading ml-1">Thank you!</h1>
+          </div>
+          {/* <GoBackButton /> */}
+        </>
       ) : (
         <>
           <p>
@@ -76,10 +101,11 @@ const BadReviewPage = ({ hash, setActivePage, setUserRate }) => {
             onChange={(event) => setReview(event.target.value)}
           />
           <div className="button-group">
+            <GoBackButton style="mr-5" />
             <div className="tooltip">
               <button
                 type="button"
-                className={`negative-step__button ${
+                className={`action-button ${
                   submitButtonDisabled ? "disabled-button" : "pointer"
                 }`}
                 disabled={submitButtonDisabled}
@@ -94,19 +120,6 @@ const BadReviewPage = ({ hash, setActivePage, setUserRate }) => {
                 )}
               </button>
             </div>
-            <button
-              type="button"
-              className="negative-step__button ml-5 pointer"
-              onClick={() => {
-                console.log("NEGATIVE_STEP");
-                // set to the first step
-                setActivePage(APP_FLOW_PAGES.RATE_PAGE);
-                setUserRate(INIT_USER_RATE);
-              }}
-            >
-              Go Back
-              <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-1" />
-            </button>
           </div>
         </>
       )}

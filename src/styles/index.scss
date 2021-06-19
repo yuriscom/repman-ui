@@ -59,8 +59,20 @@ h2 {
   margin-left: 1rem !important;
 }
 
+.mr-1 {
+  margin-right: 1rem !important;
+}
+
+.mt-2 {
+  margin-top: 2rem !important;
+}
+
 .ml-5 {
   margin-left: 5rem !important;
+}
+
+.mr-5 {
+  margin-right: 5rem !important;
 }
 
 .mt-2 {
@@ -113,8 +125,20 @@ h2 {
   z-index: 1;
   bottom: 110%;
   left: 50%;
-  margin-left: -110px;
+  margin-left: 20px;
 }
 .tooltip:hover .tooltip-text {
   visibility: visible;
+}
+
+/* Button */
+
+.action-button {
+  padding: 0.75rem 3rem;
+  font: normal normal 1rem "HelveticaLight";
+  color: $white;
+  background-color: $dark-blue;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
 }

@@ -1,3 +1,5 @@
+import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import {
   ACKNOWLEDGE_RATING_API,
@@ -10,7 +12,13 @@ import { errorAlert } from "../../utils";
 // styles
 import "./style.scss";
 
-const GoodReviewPage = ({ reviewLink, hash, setActivePage, setUserRate }) => {
+const GoodReviewPage = ({
+  reviewLink,
+  hash,
+  resetActivePage,
+  setActivePage,
+  setUserRate,
+}) => {
   const sendAcknowledgeLinkAndRedirect = () => {
     const myHeaders = new Headers();
 
@@ -63,6 +71,18 @@ const GoodReviewPage = ({ reviewLink, hash, setActivePage, setUserRate }) => {
       >
         {reviewLink}
       </a>
+      <button
+        type="button"
+        className="action-button pointer mt-2"
+        onClick={() => {
+          // set to the first step
+          resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
+          setUserRate(INIT_USER_RATE);
+        }}
+      >
+        <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-1" />
+        Go Back
+      </button>
     </div>
   );
 };

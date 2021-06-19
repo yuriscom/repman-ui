@@ -28,6 +28,8 @@ const Wrapper = () => {
 
   const redirectToTheClientWebsite = () => window.open(clientWebsite, "_self");
 
+  const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
+
   const validateHash = (hash) =>
     fetch(`${BASE_URL}${STEP_API}?hash=${hash}`, {
       method: "GET",
@@ -66,7 +68,6 @@ const Wrapper = () => {
   }, [clientWebsite]);
 
   const handleActivePage = () => {
-    console.log("HANDLE _ACTIVE_PAGE");
     // validate hash first
     validateHash(hash).then(({ statusCode, data: { step } }) => {
       if (statusCode !== 200) {
@@ -76,7 +77,6 @@ const Wrapper = () => {
     });
   };
 
-  console.log(activePage, "activePage");
   const identifyActivePageComponent = () => {
     switch (activePage) {
       case APP_FLOW_PAGES.RATE_PAGE:
@@ -99,6 +99,7 @@ const Wrapper = () => {
             clientWebsite={clientWebsite}
             setActivePage={handleActivePage}
             setUserRate={setUserRate}
+            resetActivePage={resetActivePage}
           />
         );
 
@@ -111,6 +112,7 @@ const Wrapper = () => {
             clientWebsite={clientWebsite}
             setActivePage={handleActivePage}
             setUserRate={setUserRate}
+            resetActivePage={resetActivePage}
           />
         );
 
