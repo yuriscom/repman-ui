@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   // RECEIVE_ALERT_TEXT,
   FEEDBACK_MIN_LENGTH,
