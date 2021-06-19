@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLongArrowAltRight,
-  faLongArrowAltLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   // RECEIVE_ALERT_TEXT,
   FEEDBACK_MIN_LENGTH,
@@ -74,7 +71,7 @@ const BadReviewPage = ({
         setUserRate(INIT_USER_RATE);
       }}
     >
-      <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-1" />
+      {/* <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-1" /> */}
       Go Back
     </button>
   );

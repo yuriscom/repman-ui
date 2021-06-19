@@ -80,7 +80,6 @@ const GoodReviewPage = ({
           setUserRate(INIT_USER_RATE);
         }}
       >
-        <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-1" />
         Go Back
       </button>
     </div>
