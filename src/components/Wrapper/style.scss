@@ -58,7 +58,7 @@
   }
 
   .pink-button {
-    padding: 0.75rem 3rem;
+    // padding: 0.75rem 3rem;
     font: normal normal 1rem "HelveticaLight";
     color: $dark-blue;
     background-color: #f7eceb;
@@ -91,7 +91,9 @@
   }
 
   .navy-button {
-    padding: 1rem 3rem;
+    width: 300px !important;
+    height: 50px !important;
+    padding: 1rem 3rem !important;
     font: normal normal 1.25rem "HelveticaLight";
     color: $white;
     background-color: $dark-blue;
@@ -109,7 +111,7 @@
     }
 
     .navy-button {
-      padding: 1rem 2rem;
+      padding: 1rem 2rem !important;
     }
   }
 }
@@ -142,7 +144,7 @@
     .navy-button {
       margin-top: 1rem;
       margin-bottom: 2rem;
-      padding: 1rem 3rem;
+      padding: 1rem 3rem !important;
     }
   }
 }

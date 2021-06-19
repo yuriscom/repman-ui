@@ -1,28 +1,17 @@
 import React, { useState } from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import {
-  // RECEIVE_ALERT_TEXT,
   FEEDBACK_MIN_LENGTH,
   APP_FLOW_PAGES,
   INIT_USER_RATE,
   REVIEW_API,
   BASE_URL,
 } from "../../constans";
-import {
-  // confirmAlert,
-  errorAlert,
-} from "../../utils";
+import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
 
-const BadReviewPage = ({
-  hash,
-  setActivePage,
-  setUserRate,
-  resetActivePage,
-}) => {
+const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
   const [review, setReview] = useState("");
   const [isReviewed, setIsReviewed] = useState(false);
 
@@ -64,15 +53,23 @@ const BadReviewPage = ({
   const GoBackButton = ({ style }) => (
     <button
       type="button"
-      className={`action-button pointer ${style || ""}`}
+      className={`action-button go-back-button pointer ${style || ""}`}
       onClick={() => {
         // set to the first step
         resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
         setUserRate(INIT_USER_RATE);
       }}
     >
-      {/* <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-1" /> */}
-      Go Back
+      <svg
+        width="24"
+        height="24"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="white"
+        className="go-back-arrow"
+      >
+        <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
+      </svg>
+      <div>Go Back</div>
     </button>
   );
 
@@ -83,7 +80,6 @@ const BadReviewPage = ({
           <div className="negative-step__reviewed-header">
             <h1 className="heading ml-1">Thank you!</h1>
           </div>
-          {/* <GoBackButton /> */}
         </>
       ) : (
         <>
@@ -111,8 +107,7 @@ const BadReviewPage = ({
                 Submit Feedback
                 {submitButtonDisabled && (
                   <span className="tooltip-text">
-                    Please make sure you typed out more than 10 characters to be
-                    able to send your feedback.
+                    Please make sure you typed more than 10 characters.
                   </span>
                 )}
               </button>

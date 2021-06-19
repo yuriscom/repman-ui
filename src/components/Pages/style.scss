@@ -98,8 +98,13 @@
       width: 90%;
     }
 
-    .submit-button {
-      margin-bottom: 1rem;
+    .button-group {
+      flex-direction: column;
+
+      button {
+        margin: auto !important;
+        margin-bottom: 1rem !important;
+      }
     }
   }
 

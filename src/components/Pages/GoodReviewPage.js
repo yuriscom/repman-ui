@@ -1,5 +1,3 @@
-// import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import {
   ACKNOWLEDGE_RATING_API,
@@ -73,14 +71,23 @@ const GoodReviewPage = ({
       </a>
       <button
         type="button"
-        className="action-button pointer mt-2"
+        className="action-button go-back-button pointer mt-2"
         onClick={() => {
           // set to the first step
           resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
           setUserRate(INIT_USER_RATE);
         }}
       >
-        Go Back
+        <svg
+          width="24"
+          height="24"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="white"
+          className="go-back-arrow"
+        >
+          <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
+        </svg>
+        <div>Go Back</div>
       </button>
     </div>
   );

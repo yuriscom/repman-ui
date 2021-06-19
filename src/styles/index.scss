@@ -133,12 +133,46 @@ h2 {
 
 /* Button */
 
+button {
+  width: 200px;
+  height: 40px;
+  padding: 0.75rem 2rem;
+}
+
 .action-button {
-  padding: 0.75rem 3rem;
   font: normal normal 1rem "HelveticaLight";
   color: $white;
   background-color: $dark-blue;
   border-radius: 2rem;
   border: none;
   outline: none;
+}
+
+/* Arrow */
+
+.go-back-arrow {
+  position: absolute;
+  margin-top: -6px;
+  margin-left: -62px;
+}
+
+@media screen and (max-width: 767px) {
+  .go-back-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+
+    div {
+      position: relative;
+      top: 2px;
+    }
+
+    .go-back-arrow {
+      position: relative;
+      top: 2px;
+      left: -8px;
+      margin-left: 0;
+    }
+  }
 }
