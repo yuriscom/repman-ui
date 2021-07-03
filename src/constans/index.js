@@ -3,8 +3,7 @@
 /* API */
 // export const BASE_URL =
 //   "http://ec2-18-207-112-127.compute-1.amazonaws.com:8080";
-export const BASE_URL =
-  "http://ec2-18-207-112-127.compute-1.amazonaws.com:8080";
+export const BASE_URL = "https://api.reviewclever.com:8443";
 export const CLIENT_WEBSITE_LINK = "/client";
 export const STAR_RATING_API = "/rating";
 export const REVIEW_API = "/rating/review";
