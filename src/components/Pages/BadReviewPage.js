@@ -4,7 +4,7 @@ import {
   APP_FLOW_PAGES,
   INIT_USER_RATE,
   REVIEW_API,
-  BASE_URL,
+  // BASE_URL,
 } from "../../constans";
 import { errorAlert } from "../../utils";
 
@@ -25,7 +25,7 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
       body: JSON.stringify({ review }),
     };
 
-    fetch(`${BASE_URL}${REVIEW_API}?hash=${hash}`, requestOptions)
+    fetch(`${process.env.REACT_APP_BASE_URL}${REVIEW_API}?hash=${hash}`, requestOptions)
       .then((res) => res.json())
       .then((data) => {
         const errMsg = "Something went wrong. Please try again later.";

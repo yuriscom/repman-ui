@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { RatePage, BadReviewPage, GoodReviewPage } from "../Pages";
 import { useLocation } from "react-router";
 import {
-  BASE_URL,
+  // BASE_URL,
   CLIENT_WEBSITE_LINK,
   INIT_USER_RATE,
   APP_FLOW_PAGES,
@@ -31,13 +31,13 @@ const Wrapper = () => {
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
 
   const validateHash = (hash) =>
-    fetch(`${BASE_URL}${STEP_API}?hash=${hash}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}${STEP_API}?hash=${hash}`, {
       method: "GET",
     }).then((res) => res.json());
 
   // Get link to client website
   useEffect(() => {
-    fetch(`${BASE_URL}${CLIENT_WEBSITE_LINK}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}${CLIENT_WEBSITE_LINK}`, {
       method: "GET",
     })
       .then((res) => res.json())

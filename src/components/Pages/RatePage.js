@@ -1,7 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import {
-  BASE_URL,
+  // BASE_URL,
   DEFAULT_ERROR_MESSAGE,
   REVIEW_LINK_IDENTIFIER,
   STAR_RATING_API,
@@ -43,7 +43,7 @@ const RatePage = ({
       body: raw,
     };
 
-    fetch(`${BASE_URL}${STAR_RATING_API}?hash=${hash}`, requestOptions)
+    fetch(`${process.env.REACT_APP_BASE_URL}${STAR_RATING_API}?hash=${hash}`, requestOptions)
       .then((ratePageResult) => ratePageResult.json())
       .then((data) => {
         if (data.statusCode !== 200) {

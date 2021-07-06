@@ -1,7 +1,7 @@
 import React from "react";
 import {
   ACKNOWLEDGE_RATING_API,
-  BASE_URL,
+  // BASE_URL,
   INIT_USER_RATE,
   APP_FLOW_PAGES,
 } from "../../constans";
@@ -27,7 +27,7 @@ const GoodReviewPage = ({
       headers: myHeaders,
     };
 
-    const url = `${BASE_URL}${ACKNOWLEDGE_RATING_API}?hash=${hash}`;
+    const url = `${process.env.REACT_APP_BASE_URL}${ACKNOWLEDGE_RATING_API}?hash=${hash}`;
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
