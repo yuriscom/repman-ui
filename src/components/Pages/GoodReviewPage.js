@@ -28,7 +28,6 @@ const GoodReviewPage = ({
     };
 
     const url = `${BASE_URL}${ACKNOWLEDGE_RATING_API}?hash=${hash}`;
-
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
