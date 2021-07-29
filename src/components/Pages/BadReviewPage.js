@@ -86,7 +86,8 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
             {/* <h1 className="heading ml-1">Thank you!</h1> */}
             <p>
               Dear client, we received your review, our customer care team will
-              investigate it. We will contact you as soon as possible.
+              investigate it.
+              <br /> We will contact you as soon as possible.
               <br /> Your reference number is <strong>{referenceNumber}</strong>
               .
             </p>
