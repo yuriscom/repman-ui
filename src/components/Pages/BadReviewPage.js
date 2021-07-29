@@ -13,6 +13,7 @@ import "./style.scss";
 
 const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
   const [review, setReview] = useState("");
+  const [referenceNumber, setReferenceNumber] = useState("");
   const [isReviewed, setIsReviewed] = useState(false);
 
   const handleSubmit = () => {
@@ -25,7 +26,10 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
       body: JSON.stringify({ review }),
     };
 
-    fetch(`${process.env.REACT_APP_BASE_URL}${REVIEW_API}?hash=${hash}`, requestOptions)
+    fetch(
+      `${process.env.REACT_APP_BASE_URL}${REVIEW_API}?hash=${hash}`,
+      requestOptions
+    )
       .then((res) => res.json())
       .then((data) => {
         const errMsg = "Something went wrong. Please try again later.";
@@ -34,6 +38,7 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
           return errorAlert(data.error || errMsg);
         }
 
+        setReferenceNumber(data.data.referenceNo);
         setIsReviewed(true);
 
         // confirmAlert(
@@ -78,7 +83,13 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
       {isReviewed ? (
         <>
           <div className="negative-step__reviewed-header">
-            <h1 className="heading ml-1">Thank you!</h1>
+            {/* <h1 className="heading ml-1">Thank you!</h1> */}
+            <p>
+              Dear client, we received your review, our customer care team will
+              investigate it. We will contact you as soon as possible.
+              <br /> Your reference number is <strong>{referenceNumber}</strong>
+              .
+            </p>
           </div>
         </>
       ) : (
