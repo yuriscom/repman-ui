@@ -145,6 +145,39 @@ const Wrapper = () => {
             </div>
             <div className="interaction">{identifyActivePageComponent()}</div>
             <div className="website">
+              {activePage === APP_FLOW_PAGES.BAD_REVIEW_PAGE ? (
+                <button
+                  className="go-back-button-sm-screen"
+                  onClick={() => {
+                    // set to the first step
+                    resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
+                    setUserRate(INIT_USER_RATE);
+                  }}
+                >
+                  <svg
+                    width="44"
+                    height="40"
+                    viewBox="0 0 44 44"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="pointer"
+                  >
+                    <rect
+                      x="0.5"
+                      y="0.5"
+                      width="43"
+                      height="43"
+                      rx="21.5"
+                      fill="#F8EBEA"
+                      stroke="#D4D1D1"
+                    />
+                    <path
+                      d="M26 21.4949V22.5051H19.9394L22.7172 25.2828L22 26L18 22L22 18L22.7172 18.7172L19.9394 21.4949H26Z"
+                      fill="#6B7086"
+                    />
+                  </svg>
+                </button>
+              ) : null}
               <a href={clientWebsite}>
                 <button type="button" className="pink-button pointer">
                   Visit Our Website

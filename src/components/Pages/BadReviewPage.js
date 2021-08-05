@@ -56,26 +56,32 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
   const submitButtonDisabled = review.length < FEEDBACK_MIN_LENGTH;
 
   const GoBackButton = ({ style }) => (
-    <button
-      type="button"
-      className={`action-button go-back-button pointer ${style || ""}`}
-      onClick={() => {
-        // set to the first step
-        resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
-        setUserRate(INIT_USER_RATE);
-      }}
-    >
-      <svg
-        width="24"
-        height="24"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="white"
-        className="go-back-arrow"
+    <>
+      {/* computer screen */}
+      <button
+        type="button"
+        className={`action-button go-back-button pointer display-sm-none  ${
+          style || ""
+        }`}
+        onClick={() => {
+          // set to the first step
+          resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
+          setUserRate(INIT_USER_RATE);
+        }}
       >
-        <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
-      </svg>
-      <div>Go Back</div>
-    </button>
+        <svg
+          width="24"
+          height="24"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="white"
+          className="go-back-arrow"
+        >
+          <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
+        </svg>
+
+        <div>Go Back</div>
+      </button>
+    </>
   );
 
   return (
@@ -110,7 +116,7 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
             <div className="tooltip">
               <button
                 type="button"
-                className={`action-button ${
+                className={`action-button submit-button  ${
                   submitButtonDisabled ? "disabled-button" : "pointer"
                 }`}
                 disabled={submitButtonDisabled}

@@ -70,7 +70,7 @@ const GoodReviewPage = ({
       </a>
       <button
         type="button"
-        className="action-button go-back-button pointer mt-2"
+        className="action-button go-back-button pointer mt-2 display-sm-none"
         onClick={() => {
           // set to the first step
           resetActivePage(APP_FLOW_PAGES.RATE_PAGE);

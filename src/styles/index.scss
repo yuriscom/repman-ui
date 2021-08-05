@@ -156,23 +156,42 @@ button {
   margin-left: -62px;
 }
 
+.go-back-button-sm-screen {
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
-  .go-back-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: auto;
-
-    div {
-      position: relative;
-      top: 2px;
-    }
-
-    .go-back-arrow {
-      position: relative;
-      top: 2px;
-      left: -8px;
-      margin-left: 0;
-    }
+  .display-sm-none {
+    display: none !important;
   }
+
+  .go-back-button-sm-screen {
+    display: block;
+    padding: 0;
+    // margin-right: 300px;
+    width: 0;
+    position: relative;
+    top: 0;
+    left: -60px;
+    border: 0;
+  }
+
+  // .go-back-button {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: center;
+  //   margin: auto;
+
+  //   div {
+  //     position: relative;
+  //     top: 2px;
+  //   }
+
+  //   .go-back-arrow {
+  //     position: relative;
+  //     top: 2px;
+  //     left: -8px;
+  //     margin-left: 0;
+  //   }
+  // }
 }
