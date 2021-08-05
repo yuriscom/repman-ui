@@ -31,37 +31,42 @@ const RatePage = ({
     );
 
   const changeRating = (newUserRate) => {
-    // send star rating
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    setTimeout(() => {
+      // send star rating
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-    const raw = JSON.stringify({ rating: newUserRate });
+      const raw = JSON.stringify({ rating: newUserRate });
 
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+      };
 
-    fetch(`${process.env.REACT_APP_BASE_URL}${STAR_RATING_API}?hash=${hash}`, requestOptions)
-      .then((ratePageResult) => ratePageResult.json())
-      .then((data) => {
-        if (data.statusCode !== 200) {
-          return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
+      fetch(
+        `${process.env.REACT_APP_BASE_URL}${STAR_RATING_API}?hash=${hash}`,
+        requestOptions
+      )
+        .then((ratePageResult) => ratePageResult.json())
+        .then((data) => {
+          if (data.statusCode !== 200) {
+            return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
+              window.open(clientWebsite, "_self")
+            );
+          }
+
+          setUserRate(newUserRate);
+          setHash(data.data.hash);
+          setReviewLink(identifyReviewLink(data.data.reviewLink));
+          setActivePage();
+        })
+        .catch(() =>
+          errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
             window.open(clientWebsite, "_self")
-          );
-        }
-
-        setUserRate(newUserRate);
-        setHash(data.data.hash);
-        setReviewLink(identifyReviewLink(data.data.reviewLink));
-        setActivePage();
-      })
-      .catch(() =>
-        errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-          window.open(clientWebsite, "_self")
-        )
-      );
+          )
+        );
+    }, 300);
   };
 
   return (
