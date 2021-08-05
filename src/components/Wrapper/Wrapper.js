@@ -145,7 +145,7 @@ const Wrapper = () => {
             </div>
             <div className="interaction">{identifyActivePageComponent()}</div>
             <div className="website">
-              {activePage === APP_FLOW_PAGES.BAD_REVIEW_PAGE ? (
+              {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
                 <button
                   className="go-back-button-sm-screen"
                   onClick={() => {
