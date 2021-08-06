@@ -154,7 +154,7 @@ const Wrapper = () => {
                     setUserRate(INIT_USER_RATE);
                   }}
                 >
-                  <svg
+                  {/* <svg
                     width="44"
                     height="40"
                     viewBox="0 0 44 44"
@@ -175,7 +175,8 @@ const Wrapper = () => {
                       d="M26 21.4949V22.5051H19.9394L22.7172 25.2828L22 26L18 22L22 18L22.7172 18.7172L19.9394 21.4949H26Z"
                       fill="#6B7086"
                     />
-                  </svg>
+                  </svg> */}
+                  Back
                 </button>
               ) : null}
               <a href={clientWebsite}>
