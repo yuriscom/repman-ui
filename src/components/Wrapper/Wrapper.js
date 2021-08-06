@@ -196,7 +196,7 @@ const Wrapper = () => {
                       x=".5"
                       y=".5"
                       width="43"
-                      height="43"
+                      height="40"
                       rx="21.5"
                       fill="#F8EBEA"
                       stroke="#D4D1D1"
