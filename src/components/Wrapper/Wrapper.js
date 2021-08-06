@@ -176,7 +176,27 @@ const Wrapper = () => {
                       fill="#6B7086"
                     />
                   </svg> */}
-                  Back
+                  {/* Back */}
+                  <svg
+                    width="44"
+                    height="44"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x=".5"
+                      y=".5"
+                      width="43"
+                      height="43"
+                      rx="21.5"
+                      fill="#F8EBEA"
+                      stroke="#D4D1D1"
+                    />
+                    <path
+                      d="M26 21.495v1.01h-6.06l2.777 2.778L22 26l-4-4 4-4 .717.717-2.778 2.778H26z"
+                      fill="#6B7086"
+                    />
+                  </svg>
                 </button>
               ) : null}
               <a href={clientWebsite}>
