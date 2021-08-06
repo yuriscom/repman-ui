@@ -144,7 +144,12 @@ const Wrapper = () => {
               <img src={logo} alt="logo" />
             </div>
             <div className="interaction">{identifyActivePageComponent()}</div>
-            <div className="website">
+            <div
+              className="website"
+              style={{
+                left: activePage !== APP_FLOW_PAGES.RATE_PAGE ? "-22px" : "0",
+              }}
+            >
               {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
                 <>
                   {/* <button
