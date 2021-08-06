@@ -146,14 +146,15 @@ const Wrapper = () => {
             <div className="interaction">{identifyActivePageComponent()}</div>
             <div className="website">
               {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
-                <button
+                <>
+                  {/* <button
                   className="go-back-button-sm-screen"
                   onClick={() => {
                     // set to the first step
                     resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
                     setUserRate(INIT_USER_RATE);
                   }}
-                >
+                > */}
                   {/* <svg
                     width="44"
                     height="40"
@@ -178,10 +179,18 @@ const Wrapper = () => {
                   </svg> */}
                   {/* Back */}
                   <svg
+                    type="button"
                     width="44"
                     height="44"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    version="1.1"
+                    className="go-back-button-sm-screen"
+                    onClick={() => {
+                      // set to the first step
+                      resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
+                      setUserRate(INIT_USER_RATE);
+                    }}
                   >
                     <rect
                       x=".5"
@@ -197,7 +206,8 @@ const Wrapper = () => {
                       fill="#6B7086"
                     />
                   </svg>
-                </button>
+                  {/* </button> */}
+                </>
               ) : null}
               <a href={clientWebsite}>
                 <button type="button" className="pink-button pointer">
