@@ -5,7 +5,7 @@ import {
   INIT_USER_RATE,
   APP_FLOW_PAGES,
 } from "../../constans";
-import { errorAlert } from "../../utils";
+// import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
@@ -16,6 +16,7 @@ const GoodReviewPage = ({
   resetActivePage,
   setActivePage,
   setUserRate,
+  redirectToTheClientWebsite,
 }) => {
   const sendAcknowledgeLinkAndRedirect = () => {
     const myHeaders = new Headers();
@@ -31,7 +32,7 @@ const GoodReviewPage = ({
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        const errMsg = "Something went wrong. Please try again later.";
+        // const errMsg = "Something went wrong. Please try again later.";
 
         // if (data.data) {
         //   window.open(reviewLink);
@@ -40,14 +41,18 @@ const GoodReviewPage = ({
         // }
 
         if (!data.data) {
-          return errorAlert(data.error || errMsg);
+          redirectToTheClientWebsite();
+          // return errorAlert(data.error || errMsg);
         }
 
         // // set to the first step
         setActivePage(APP_FLOW_PAGES.RATE_PAGE);
         setUserRate(INIT_USER_RATE);
       })
-      .catch((error) => errorAlert(error));
+      .catch((error) => {
+        redirectToTheClientWebsite();
+        // errorAlert(error)
+      });
   };
 
   return (

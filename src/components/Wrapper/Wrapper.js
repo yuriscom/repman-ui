@@ -33,7 +33,9 @@ const Wrapper = () => {
   const validateHash = (hash) =>
     fetch(`${process.env.REACT_APP_BASE_URL}${STEP_API}?hash=${hash}`, {
       method: "GET",
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .catch((error) => error);
 
   // Get link to client website
   useEffect(() => {
@@ -55,12 +57,14 @@ const Wrapper = () => {
 
       if (hash !== "") {
         setHash(hash);
-        validateHash(hash).then(({ statusCode, error, data: { step } }) => {
-          if (statusCode !== 200) {
-            return redirectToTheClientWebsite();
-          }
-          setActivePage(step);
-        });
+        validateHash(hash)
+          .then(({ statusCode, error, data: { step } }) => {
+            if (statusCode !== 200) {
+              return redirectToTheClientWebsite();
+            }
+            setActivePage(step);
+          })
+          .catch((error) => redirectToTheClientWebsite());
       } else {
         return redirectToTheClientWebsite();
       }
@@ -89,6 +93,7 @@ const Wrapper = () => {
             setActivePage={handleActivePage}
             setReviewLink={setReviewLink}
             setHash={setHash}
+            redirectToTheClientWebsite={redirectToTheClientWebsite}
           />
         );
 
@@ -100,6 +105,7 @@ const Wrapper = () => {
             setActivePage={handleActivePage}
             setUserRate={setUserRate}
             resetActivePage={resetActivePage}
+            redirectToTheClientWebsite={redirectToTheClientWebsite}
           />
         );
 
@@ -113,6 +119,7 @@ const Wrapper = () => {
             setActivePage={handleActivePage}
             setUserRate={setUserRate}
             resetActivePage={resetActivePage}
+            redirectToTheClientWebsite={redirectToTheClientWebsite}
           />
         );
 

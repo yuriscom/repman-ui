@@ -7,7 +7,7 @@ import {
   STAR_RATING_API,
   NUMBER_OF_STARS,
 } from "../../constans";
-import { errorAlert } from "../../utils";
+// import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
@@ -20,6 +20,7 @@ const RatePage = ({
   setActivePage,
   setHash,
   setReviewLink,
+  redirectToTheClientWebsite,
 }) => {
   const identifyReviewLink = (link) =>
     decodeURIComponent(
@@ -51,9 +52,10 @@ const RatePage = ({
         .then((ratePageResult) => ratePageResult.json())
         .then((data) => {
           if (data.statusCode !== 200) {
-            return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-              window.open(clientWebsite, "_self")
-            );
+            // return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
+            //   window.open(clientWebsite, "_self")
+            // );
+            redirectToTheClientWebsite();
           }
 
           setUserRate(newUserRate);
@@ -61,11 +63,12 @@ const RatePage = ({
           setReviewLink(identifyReviewLink(data.data.reviewLink));
           setActivePage();
         })
-        .catch(() =>
-          errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-            window.open(clientWebsite, "_self")
-          )
-        );
+        .catch(() => {
+          // errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
+          //   window.open(clientWebsite, "_self")
+          // )
+          redirectToTheClientWebsite();
+        });
     }, 300);
   };
 

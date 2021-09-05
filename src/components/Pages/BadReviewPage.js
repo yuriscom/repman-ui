@@ -11,7 +11,12 @@ import { errorAlert } from "../../utils";
 // styles
 import "./style.scss";
 
-const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
+const BadReviewPage = ({
+  hash,
+  setUserRate,
+  resetActivePage,
+  redirectToTheClientWebsite,
+}) => {
   const [review, setReview] = useState("");
   const [referenceNumber, setReferenceNumber] = useState("");
   const [isReviewed, setIsReviewed] = useState(false);
@@ -35,7 +40,8 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
         const errMsg = "Something went wrong. Please try again later.";
 
         if (data.statusCode !== 200) {
-          return errorAlert(data.error || errMsg);
+          redirectToTheClientWebsite();
+          // return errorAlert(data.error || errMsg);
         }
 
         setReferenceNumber(data.data.referenceNo);
@@ -50,7 +56,10 @@ const BadReviewPage = ({ hash, setUserRate, resetActivePage }) => {
         //   setUserRate(INIT_USER_RATE);
         // });
       })
-      .catch((error) => errorAlert(error));
+      .catch((error) => {
+        redirectToTheClientWebsite();
+        // errorAlert(error)
+      });
   };
 
   const submitButtonDisabled = review.length < FEEDBACK_MIN_LENGTH;
