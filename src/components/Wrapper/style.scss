@@ -42,8 +42,13 @@
     border-bottom: solid 1px lightgrey;
 
     img {
-      width: 250px;
-      height: 150px;
+      // old logo settings
+      // width: 250px;
+      // height: 150px;
+
+      // new logo settings
+      max-width: 95%;
+      width: 300px;
     }
   }
 

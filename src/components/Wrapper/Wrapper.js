@@ -53,7 +53,10 @@ const Wrapper = () => {
       location.pathname !== DEBUG_LINK &&
       clientWebsite
     ) {
-      const hash = location.pathname.slice(1, location.pathname.lastIndexOf('/'));
+      const hash = location.pathname.slice(
+        1,
+        location.pathname.lastIndexOf("/")
+      );
 
       if (hash !== "") {
         setHash(hash);
