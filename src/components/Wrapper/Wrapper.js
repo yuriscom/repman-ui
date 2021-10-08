@@ -33,10 +33,10 @@ const Wrapper = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      method: "POST",
-      body: JSON.stringify({
-        message: errorMessage || "Hash is invalid",
-      }),
+      method: "GET",
+      // body: JSON.stringify({
+      //   message: errorMessage || "Hash is invalid",
+      // }),
     });
 
   const redirectToTheClientWebsite = (error) => {
