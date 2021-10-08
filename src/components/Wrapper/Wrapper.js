@@ -55,7 +55,7 @@ const Wrapper = () => {
     ) {
       const hash = location.pathname.slice(
         1,
-        location.pathname.lastIndexOf("/")
+        location.pathname.slice(1).lastIndexOf("/")
       );
 
       if (hash !== "") {
