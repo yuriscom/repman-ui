@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RatePage, BadReviewPage, GoodReviewPage } from "../Pages";
 import { useLocation } from "react-router";
+import * as Sentry from "@sentry/react";
 import {
   // BASE_URL,
   CLIENT_WEBSITE_LINK,
@@ -26,7 +27,24 @@ const Wrapper = () => {
 
   const location = useLocation();
 
-  const redirectToTheClientWebsite = () => window.open(clientWebsite, "_self");
+  const sendError = (errorMessage) =>
+    fetch("/errorlog", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        message: errorMessage || "Hash is invalid",
+      }),
+    });
+
+  const redirectToTheClientWebsite = (error) => {
+    const errorMsg = error || "Hash is invalid";
+    Sentry.captureMessage(errorMsg);
+    sendError(errorMsg).then(() => window.open(clientWebsite, "_self"));
+    // window.open(clientWebsite, "_self");
+  };
 
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
 
@@ -67,7 +85,7 @@ const Wrapper = () => {
             }
             setActivePage(step);
           })
-          .catch((error) => redirectToTheClientWebsite());
+          .catch((error) => redirectToTheClientWebsite(error));
       } else {
         return redirectToTheClientWebsite();
       }
