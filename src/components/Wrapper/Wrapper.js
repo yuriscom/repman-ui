@@ -28,7 +28,7 @@ const Wrapper = () => {
   const location = useLocation();
 
   const sendError = (errorMessage) =>
-    fetch("/errorlog", {
+    fetch("/errorLog", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -42,7 +42,8 @@ const Wrapper = () => {
   const redirectToTheClientWebsite = (error) => {
     const errorMsg = error || "Hash is invalid";
     Sentry.captureMessage(errorMsg);
-    sendError(errorMsg).then(() => window.open(clientWebsite, "_self"));
+    sendError(errorMsg)
+    // .then(() => window.open(clientWebsite, "_self"));
     // window.open(clientWebsite, "_self");
   };
 
