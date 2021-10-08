@@ -44,7 +44,7 @@ const Wrapper = () => {
     Sentry.captureMessage(errorMsg);
     sendError(errorMsg)
     // .then(() => window.open(clientWebsite, "_self"));
-    // window.open(clientWebsite, "_self");
+    window.open(clientWebsite, "_self");
   };
 
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
