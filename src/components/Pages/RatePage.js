@@ -58,6 +58,9 @@ const RatePage = ({
             redirectToTheClientWebsite();
           }
 
+          // console.log(data.forwardToUrl, "data");
+          // console.log(data.data.hash, "data.data.hash");
+
           setUserRate(newUserRate);
           setHash(data.data.hash);
           setReviewLink(identifyReviewLink(data.data.reviewLink));

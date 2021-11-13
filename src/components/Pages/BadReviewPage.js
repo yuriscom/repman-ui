@@ -6,7 +6,7 @@ import {
   REVIEW_API,
   // BASE_URL,
 } from "../../constans";
-import { errorAlert } from "../../utils";
+// import { errorAlert } from "../../utils";
 
 // styles
 import "./style.scss";
@@ -37,7 +37,7 @@ const BadReviewPage = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        const errMsg = "Something went wrong. Please try again later.";
+        // const errMsg = "Something went wrong. Please try again later.";
 
         if (data.statusCode !== 200) {
           redirectToTheClientWebsite();

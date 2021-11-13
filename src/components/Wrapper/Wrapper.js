@@ -10,6 +10,7 @@ import {
   STEP_API,
   APPOINTMENT_LINK,
   DEBUG_LINK,
+  REVIEW_LINK_IDENTIFIER,
 } from "../../constans";
 
 // styles
@@ -27,34 +28,34 @@ const Wrapper = () => {
 
   const location = useLocation();
 
-  const sendError = (errorMessage) =>
-    fetch("/errorLog", {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-      // body: JSON.stringify({
-      //   message: errorMessage || "Hash is invalid",
-      // }),
-    });
+  // const sendError = (errorMessage) =>
+  //   fetch("/errorLog", {
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //     method: "GET",
+  //     // body: JSON.stringify({
+  //     //   message: errorMessage || "Hash is invalid",
+  //     // }),
+  //   });
 
   const redirectToTheClientWebsite = (error) => {
     const errorMsg = error || "Hash is invalid";
     Sentry.captureMessage(errorMsg);
-    sendError(errorMsg)
-    // .then(() => window.open(clientWebsite, "_self"));
+    // sendError(errorMsg).then(() => window.open(clientWebsite, "_self"));
     window.open(clientWebsite, "_self");
   };
 
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
 
-  const validateHash = (hash) =>
-    fetch(`${process.env.REACT_APP_BASE_URL}${STEP_API}?hash=${hash}`, {
+  const validateHash = (hash) => {
+    return fetch(`${process.env.REACT_APP_BASE_URL}${STEP_API}?hash=${hash}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .catch((error) => error);
+  };
 
   // Get link to client website
   useEffect(() => {
@@ -72,20 +73,35 @@ const Wrapper = () => {
       location.pathname !== DEBUG_LINK &&
       clientWebsite
     ) {
+      const containSlash = location.pathname.slice(1).lastIndexOf("/");
+
       const hash = location.pathname.slice(
         1,
-        location.pathname.slice(1).lastIndexOf("/")
+        containSlash === -1 ? location.length : containSlash
       );
 
       if (hash !== "") {
         setHash(hash);
         validateHash(hash)
-          .then(({ statusCode, error, data: { step } }) => {
-            if (statusCode !== 200) {
-              return redirectToTheClientWebsite();
+          .then(
+            ({
+              statusCode,
+              error,
+              data,
+              // data: { step }
+            }) => {
+              const { step } = data;
+              if (statusCode !== 200) {
+                return redirectToTheClientWebsite();
+              }
+
+              if (data[REVIEW_LINK_IDENTIFIER]) {
+                setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
+                window.open(data[REVIEW_LINK_IDENTIFIER], "_self");
+              }
+              setActivePage(step);
             }
-            setActivePage(step);
-          })
+          )
           .catch((error) => redirectToTheClientWebsite(error));
       } else {
         return redirectToTheClientWebsite();
@@ -95,7 +111,9 @@ const Wrapper = () => {
 
   const handleActivePage = () => {
     // validate hash first
-    validateHash(hash).then(({ statusCode, data: { step } }) => {
+    validateHash(hash).then(({ statusCode, data }) => {
+      const { step } = data;
+
       if (statusCode !== 200) {
         return redirectToTheClientWebsite();
       }

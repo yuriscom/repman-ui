@@ -19,10 +19,12 @@ export const RECEIVE_ALERT_TEXT =
 export const INIT_USER_RATE = 0;
 export const FEEDBACK_MIN_LENGTH = 10;
 export const NUMBER_OF_STARS = 5;
-export const REVIEW_LINK_IDENTIFIER = "redirectTo";
+// export const REVIEW_LINK_IDENTIFIER = "redirectTo";
+export const REVIEW_LINK_IDENTIFIER = "forwardToUrl";
 
 export const APP_FLOW_PAGES = {
   RATE_PAGE: "RATE_PAGE",
   BAD_REVIEW_PAGE: "BAD_REVIEW_PAGE",
   SHARE_GOOD_REVIEW_PAGE: "SHARE_GOOD_REVIEW_PAGE",
+  FORWARD: "FORWARD",
 };
