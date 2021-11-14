@@ -68,6 +68,15 @@ const Wrapper = () => {
       .catch((error) => error);
   };
 
+  //
+
+  // Get link to client website
+  useEffect(() => {
+    if (location.pathname === DEBUG_LINK) {
+      setStepIdentified(true);
+    }
+  }, []);
+
   // Get link to client website
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BASE_URL}${CLIENT_WEBSITE_LINK}`, {
@@ -121,6 +130,7 @@ const Wrapper = () => {
       } else {
         return redirectToTheClientWebsite();
       }
+    } else {
     }
   }, [clientWebsite]);
 
