@@ -25,6 +25,7 @@ const Wrapper = () => {
   const [reviewLink, setReviewLink] = useState("");
   const [hash, setHash] = useState();
   const [clientWebsite, setClientWebsite] = useState();
+  const [stepIdentified, setStepIdentified] = useState(false);
 
   const location = useLocation();
 
@@ -50,9 +51,19 @@ const Wrapper = () => {
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
 
   const validateHash = (hash) => {
-    return fetch(`${process.env.REACT_APP_BASE_URL}${STEP_API}?hash=${hash}`, {
-      method: "GET",
-    })
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify({ userAgent: navigator.userAgent }),
+    };
+
+    return fetch(
+      `${process.env.REACT_APP_BASE_URL}${STEP_API}?hash=${hash}`,
+      requestOptions
+    )
       .then((res) => res.json())
       .catch((error) => error);
   };
@@ -73,11 +84,11 @@ const Wrapper = () => {
       location.pathname !== DEBUG_LINK &&
       clientWebsite
     ) {
-      const containSlash = location.pathname.slice(1).lastIndexOf("/");
+      const containsSlash = location.pathname.slice(1).lastIndexOf("/");
 
       const hash = location.pathname.slice(
         1,
-        containSlash === -1 ? location.length : containSlash
+        containsSlash === -1 ? location.length : containsSlash
       );
 
       if (hash !== "") {
@@ -95,10 +106,14 @@ const Wrapper = () => {
                 return redirectToTheClientWebsite();
               }
 
+              // if we get this link right onload, we have to redirect a user
               if (data[REVIEW_LINK_IDENTIFIER]) {
                 setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
                 window.open(data[REVIEW_LINK_IDENTIFIER], "_self");
+              } else {
+                setStepIdentified(true);
               }
+
               setActivePage(step);
             }
           )
@@ -178,7 +193,7 @@ const Wrapper = () => {
     }
   };
 
-  return (
+  return stepIdentified ? (
     <>
       <div className="page-wrapper">
         <div className="heading-container">
@@ -199,37 +214,6 @@ const Wrapper = () => {
             >
               {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
                 <>
-                  {/* <button
-                  className="go-back-button-sm-screen"
-                  onClick={() => {
-                    // set to the first step
-                    resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
-                    setUserRate(INIT_USER_RATE);
-                  }}
-                > */}
-                  {/* <svg
-                    width="44"
-                    height="40"
-                    viewBox="0 0 44 44"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="pointer"
-                  >
-                    <rect
-                      x="0.5"
-                      y="0.5"
-                      width="43"
-                      height="43"
-                      rx="21.5"
-                      fill="#F8EBEA"
-                      stroke="#D4D1D1"
-                    />
-                    <path
-                      d="M26 21.4949V22.5051H19.9394L22.7172 25.2828L22 26L18 22L22 18L22.7172 18.7172L19.9394 21.4949H26Z"
-                      fill="#6B7086"
-                    />
-                  </svg> */}
-                  {/* Back */}
                   <svg
                     type="button"
                     width="44"
@@ -290,7 +274,7 @@ const Wrapper = () => {
         </div>
       </footer>
     </>
-  );
+  ) : null;
 };
 
 export default Wrapper;
