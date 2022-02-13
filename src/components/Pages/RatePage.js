@@ -51,7 +51,7 @@ const RatePage = ({
       )
         .then((ratePageResult) => ratePageResult.json())
         .then((data) => {
-          if (data.statusCode !== 200) {
+          if (data.status !== 200) {
             // return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
             //   window.open(clientWebsite, "_self")
             // );

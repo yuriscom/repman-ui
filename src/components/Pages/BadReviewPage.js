@@ -39,7 +39,7 @@ const BadReviewPage = ({
       .then((data) => {
         // const errMsg = "Something went wrong. Please try again later.";
 
-        if (data.statusCode !== 200) {
+        if (data.status !== 200) {
           redirectToTheClientWebsite();
           // return errorAlert(data.error || errMsg);
         }

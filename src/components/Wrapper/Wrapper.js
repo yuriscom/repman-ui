@@ -44,7 +44,7 @@ const Wrapper = () => {
   const redirectToTheClientWebsite = (error) => {
     const errorMsg = error || "Hash is invalid";
     Sentry.captureMessage(errorMsg);
-    // sendError(errorMsg).then(() => window.open(clientWebsite, "_self"));
+    sendError(errorMsg).then(() => window.open(clientWebsite, "_self"));
     window.open(clientWebsite, "_self");
   };
 
@@ -67,8 +67,6 @@ const Wrapper = () => {
       .then((res) => res.json())
       .catch((error) => error);
   };
-
-  //
 
   // Get link to client website
   useEffect(() => {
@@ -105,13 +103,13 @@ const Wrapper = () => {
         validateHash(hash)
           .then(
             ({
-              statusCode,
+              status,
               error,
               data,
               // data: { step }
             }) => {
               const { step } = data;
-              if (statusCode !== 200) {
+              if (status !== 200) {
                 return redirectToTheClientWebsite();
               }
 
@@ -136,10 +134,10 @@ const Wrapper = () => {
 
   const handleActivePage = () => {
     // validate hash first
-    validateHash(hash).then(({ statusCode, data }) => {
+    validateHash(hash).then(({ status, data }) => {
       const { step } = data;
 
-      if (statusCode !== 200) {
+      if (status !== 200) {
         return redirectToTheClientWebsite();
       }
       setActivePage(step);
