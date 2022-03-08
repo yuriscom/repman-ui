@@ -16,7 +16,7 @@ import {
 import "./style.scss";
 
 // assets
-import logo from "../../assets/logo.png";
+import defaultLogo from "../../assets/logo.png";
 import { detectMobile } from "../../utils";
 
 const Wrapper = () => {
@@ -26,6 +26,7 @@ const Wrapper = () => {
   const [hash, setHash] = useState();
   const [clientWebsite, setClientWebsite] = useState();
   const [stepIdentified, setStepIdentified] = useState(false);
+  const [logoPath, setLogoPath] = useState();
 
   const location = useLocation();
 
@@ -60,6 +61,7 @@ const Wrapper = () => {
   useEffect(() => {
     if (location.pathname === DEBUG_LINK) {
       setStepIdentified(true);
+      setLogoPath(defaultLogo);
     }
   }, []);
 
@@ -81,12 +83,24 @@ const Wrapper = () => {
               step,
               forwardToUrl,
 
-              clientDetails: { website, linkGoogleDesktop, linkGoogleMobile },
+              clientDetails: {
+                website,
+                linkGoogleDesktop,
+                linkGoogleMobile,
+                logo,
+              },
             } = data;
 
             if (status !== 200) {
               return redirectToTheClientWebsite(null, website);
             }
+
+            // set Logo image
+            setLogoPath(
+              logo
+                ? `https://reviewclever.com/static/media/${logo}`
+                : defaultLogo
+            );
             // if we get this link right onload, we have to redirect a user
             if (data[REVIEW_LINK_IDENTIFIER]) {
               setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
@@ -193,7 +207,7 @@ const Wrapper = () => {
         <div className="review-container">
           <div className="review-component">
             <div className="logo-container">
-              <img src={logo} alt="logo" />
+              <img src={logoPath} alt="logo" />
             </div>
             <div className="interaction">{identifyActivePageComponent()}</div>
             <div
