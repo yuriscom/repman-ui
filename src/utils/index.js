@@ -1,3 +1,4 @@
 import { errorAlert, confirmAlert } from "./alertMessages";
+import detectMobile from "./detectMobile";
 
-export { errorAlert, confirmAlert };
+export { errorAlert, confirmAlert, detectMobile };

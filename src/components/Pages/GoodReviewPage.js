@@ -26,6 +26,7 @@ const GoodReviewPage = ({
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
+      body: JSON.stringify({ userAgent: navigator.userAgent }),
     };
 
     const url = `${process.env.REACT_APP_BASE_URL}${ACKNOWLEDGE_RATING_API}?hash=${hash}`;
@@ -75,7 +76,7 @@ const GoodReviewPage = ({
       </a>
       <button
         type="button"
-        className="action-button go-back-button pointer mt-2 display-sm-none"
+        className="action-button go-back-button pointer display-sm-none mt-1"
         onClick={() => {
           // set to the first step
           resetActivePage(APP_FLOW_PAGES.RATE_PAGE);

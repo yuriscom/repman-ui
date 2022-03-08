@@ -4,7 +4,6 @@ import { useLocation } from "react-router";
 import * as Sentry from "@sentry/react";
 import {
   // BASE_URL,
-  CLIENT_WEBSITE_LINK,
   INIT_USER_RATE,
   APP_FLOW_PAGES,
   STEP_API,
@@ -18,6 +17,7 @@ import "./style.scss";
 
 // assets
 import logo from "../../assets/logo.png";
+import { detectMobile } from "../../utils";
 
 const Wrapper = () => {
   const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
@@ -29,22 +29,10 @@ const Wrapper = () => {
 
   const location = useLocation();
 
-  // const sendError = (errorMessage) =>
-  //   fetch("/errorLog", {
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     method: "GET",
-  //     // body: JSON.stringify({
-  //     //   message: errorMessage || "Hash is invalid",
-  //     // }),
-  //   });
-
-  const redirectToTheClientWebsite = (error) => {
+  const redirectToTheClientWebsite = (error, link = undefined) => {
     const errorMsg = error || "Hash is invalid";
-    Sentry.captureMessage(errorMsg);
-    sendError(errorMsg).then(() => window.open(clientWebsite, "_self"));
+    // Sentry.captureMessage(errorMsg);
+    sendError(errorMsg).then(() => window.open(link || clientWebsite, "_self"));
     window.open(clientWebsite, "_self");
   };
 
@@ -75,22 +63,9 @@ const Wrapper = () => {
     }
   }, []);
 
-  // Get link to client website
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_BASE_URL}${CLIENT_WEBSITE_LINK}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then(({ data: { website } }) => setClientWebsite(website));
-  }, []);
-
   // Get initial hash
   useEffect(() => {
-    if (
-      location?.pathname &&
-      location.pathname !== DEBUG_LINK &&
-      clientWebsite
-    ) {
+    if (location?.pathname && location.pathname !== DEBUG_LINK) {
       const containsSlash = location.pathname.slice(1).lastIndexOf("/");
 
       const hash = location.pathname.slice(
@@ -101,36 +76,41 @@ const Wrapper = () => {
       if (hash !== "") {
         setHash(hash);
         validateHash(hash)
-          .then(
-            ({
-              status,
-              error,
-              data,
-              // data: { step }
-            }) => {
-              const { step } = data;
-              if (status !== 200) {
-                return redirectToTheClientWebsite();
-              }
+          .then(({ status, error, data }) => {
+            const {
+              step,
+              forwardToUrl,
 
-              // if we get this link right onload, we have to redirect a user
-              if (data[REVIEW_LINK_IDENTIFIER]) {
-                setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
-                window.open(data[REVIEW_LINK_IDENTIFIER], "_self");
-              } else {
-                setStepIdentified(true);
-              }
+              clientDetails: { website, linkGoogleDesktop, linkGoogleMobile },
+            } = data;
 
-              setActivePage(step);
+            if (status !== 200) {
+              return redirectToTheClientWebsite(null, website);
             }
-          )
+            // if we get this link right onload, we have to redirect a user
+            if (data[REVIEW_LINK_IDENTIFIER]) {
+              setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
+              window.open(data[REVIEW_LINK_IDENTIFIER], "_self");
+            } else {
+              setStepIdentified(true);
+            }
+
+            // set review link
+            if (detectMobile()) {
+              setReviewLink(linkGoogleMobile);
+            } else {
+              setReviewLink(linkGoogleDesktop);
+            }
+
+            setClientWebsite(website);
+            setActivePage(step);
+          })
           .catch((error) => redirectToTheClientWebsite(error));
       } else {
         return redirectToTheClientWebsite();
       }
-    } else {
     }
-  }, [clientWebsite]);
+  }, []);
 
   const handleActivePage = () => {
     // validate hash first
@@ -161,6 +141,7 @@ const Wrapper = () => {
         );
 
       case APP_FLOW_PAGES.BAD_REVIEW_PAGE:
+      case APP_FLOW_PAGES.CLAIM_REFERENCE_PAGE:
         return (
           <BadReviewPage
             hash={hash}
@@ -173,6 +154,7 @@ const Wrapper = () => {
         );
 
       case APP_FLOW_PAGES.SHARE_GOOD_REVIEW_PAGE:
+      case APP_FLOW_PAGES.THANKYOU_PAGE:
         return (
           <GoodReviewPage
             reviewLink={reviewLink}

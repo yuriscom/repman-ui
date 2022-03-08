@@ -2,7 +2,7 @@ import React from "react";
 import StarRatings from "react-star-ratings";
 import {
   // BASE_URL,
-  DEFAULT_ERROR_MESSAGE,
+  // DEFAULT_ERROR_MESSAGE,
   REVIEW_LINK_IDENTIFIER,
   STAR_RATING_API,
   NUMBER_OF_STARS,
@@ -15,11 +15,11 @@ import "./style.scss";
 const RatePage = ({
   userRate,
   hash,
-  clientWebsite,
+  // clientWebsite,
   setUserRate,
   setActivePage,
   setHash,
-  setReviewLink,
+  // setReviewLink,
   redirectToTheClientWebsite,
 }) => {
   const identifyReviewLink = (link) =>
@@ -37,12 +37,13 @@ const RatePage = ({
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-      const raw = JSON.stringify({ rating: newUserRate });
-
       const requestOptions = {
         method: "POST",
         headers: myHeaders,
-        body: raw,
+        body: JSON.stringify({
+          rating: newUserRate,
+          userAgent: navigator.userAgent,
+        }),
       };
 
       fetch(
@@ -58,12 +59,9 @@ const RatePage = ({
             redirectToTheClientWebsite();
           }
 
-          // console.log(data.forwardToUrl, "data");
-          // console.log(data.data.hash, "data.data.hash");
-
           setUserRate(newUserRate);
           setHash(data.data.hash);
-          setReviewLink(identifyReviewLink(data.data.reviewLink));
+          // setReviewLink(identifyReviewLink(data.data.reviewLink));
           setActivePage();
         })
         .catch(() => {

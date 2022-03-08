@@ -28,7 +28,7 @@ const BadReviewPage = ({
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: JSON.stringify({ review }),
+      body: JSON.stringify({ review, userAgent: navigator.userAgent }),
     };
 
     fetch(
