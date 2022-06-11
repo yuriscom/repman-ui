@@ -1,31 +1,38 @@
 @import "../../styles/variables.scss";
 
 .page-wrapper {
-  display: table;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // display: table;
   max-width: $max-container-width;
-  width: 100%;
+  // width: 100%;
   margin: 0 auto;
   height: calc(100vh - 150px);
 }
 
-.heading-container {
-  display: table-row;
-}
+// .heading-container {
+//   display: table-row;
+// }
 
 .heading {
-  display: table-cell;
-  vertical-align: bottom;
+  // display: table-cell;
+  // vertical-align: bottom;
   font-family: "HenrietteBold";
   color: $dark-blue;
-  padding-bottom: 1rem;
+  // padding-bottom: 1rem;
   text-align: center;
 }
 
 /* review-component component */
 .review-container {
-  display: table-row;
-  vertical-align: middle;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // display: table-row;
+  // vertical-align: middle;
+  // padding: 2rem;
 }
 
 .review-component {

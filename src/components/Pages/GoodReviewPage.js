@@ -33,48 +33,45 @@ const GoodReviewPage = ({
     fetch(url, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // const errMsg = "Something went wrong. Please try again later.";
-
-        // if (data.data) {
-        //   window.open(reviewLink);
-        // } else {
-        //   return errorAlert(data.error || errMsg);
-        // }
-
         if (!data.data) {
-          redirectToTheClientWebsite();
-          // return errorAlert(data.error || errMsg);
+          redirectToTheClientWebsite("Good Review Page Error");
+          return;
         }
 
-        // // set to the first step
         setActivePage(APP_FLOW_PAGES.RATE_PAGE);
         setUserRate(INIT_USER_RATE);
       })
-      .catch((error) => {
-        redirectToTheClientWebsite();
-        // errorAlert(error)
+      .catch(() => {
+        redirectToTheClientWebsite("Good Review Page Error");
       });
   };
 
   return (
     <div className="step-container positive-step">
-      <p>
-        We are so glad you had a positive experience!
-        <br />
-        We would appreciate it if you could share your review on Google!
-        <br />
-        Thank you for the feedback!
+      <p className="share-review-text">
+        Thank you for your feedback, we are so happy you enjoyed your visit.
+        Please share this on Google reviews to receive 5,000 reward points,
+        redeemable at our clinic. <br />{" "}
+        <span className="resitrcitons-word"> (restrictions apply)</span>
       </p>
-      <h2 className="share-review-heading">Share your review!</h2>
-      <a
+      {/* <h2 className="share-review-heading">Share your review!</h2> */}
+      {/* <a
         target="_blank"
         className="redirect-link"
         href={reviewLink}
         onClick={() => sendAcknowledgeLinkAndRedirect()}
       >
-        {reviewLink}
-      </a>
+        Post a review
+      </a> */}
       <button
+        target="_blank"
+        className="action-button go-back-button pointer mt-1"
+        href={reviewLink}
+        onClick={() => sendAcknowledgeLinkAndRedirect()}
+      >
+        Post a review
+      </button>
+      {/* <button
         type="button"
         className="action-button go-back-button pointer display-sm-none mt-1"
         onClick={() => {
@@ -93,7 +90,7 @@ const GoodReviewPage = ({
           <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
         </svg>
         <div>Go Back</div>
-      </button>
+      </button> */}
     </div>
   );
 };

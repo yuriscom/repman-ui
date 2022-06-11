@@ -19,7 +19,7 @@ const BadReviewPage = ({
 }) => {
   const [review, setReview] = useState("");
   const [referenceNumber, setReferenceNumber] = useState("");
-  const [isReviewed, setIsReviewed] = useState(false);
+  const [isReviewed, setIsReviewed] = useState(true);
 
   const handleSubmit = () => {
     const myHeaders = new Headers();
@@ -37,28 +37,16 @@ const BadReviewPage = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        // const errMsg = "Something went wrong. Please try again later.";
-
         if (data.status !== 200) {
-          redirectToTheClientWebsite();
-          // return errorAlert(data.error || errMsg);
+          redirectToTheClientWebsite(data.error);
+          return;
         }
 
         setReferenceNumber(data.data.referenceNo);
         setIsReviewed(true);
-
-        // confirmAlert(
-        //   `Your reference no. is ${data.data.referenceNo}`,
-        //   RECEIVE_ALERT_TEXT
-        // ).then(() => {
-        //   // set to the first step
-        //   setActivePage(APP_FLOW_PAGES.RATE_PAGE);
-        //   setUserRate(INIT_USER_RATE);
-        // });
       })
-      .catch((error) => {
-        redirectToTheClientWebsite();
-        // errorAlert(error)
+      .catch(() => {
+        redirectToTheClientWebsite("Bad Review Page Error");
       });
   };
 
@@ -98,23 +86,23 @@ const BadReviewPage = ({
       {isReviewed ? (
         <>
           <div className="negative-step__reviewed-header">
-            {/* <h1 className="heading ml-1">Thank you!</h1> */}
+            <h2 className="heading pb-0 ml-1">Thank you!</h2>
             <p>
-              Dear client, we received your review, our customer care team will
+              Your opinion is important to us.
+              {/* Dear client, we received your review, our customer care team will
               investigate it.
               <br /> We will contact you as soon as possible.
               <br /> Your reference number is <strong>{referenceNumber}</strong>
-              .
+              . */}
             </p>
           </div>
         </>
       ) : (
         <>
-          <p>
-            We are sorry to hear that.
-            <br />
-            Please tell us what went wrong so that we could improve our
-            services. Your feedback is very important to us!
+          <p className="negative-step__reviewed-text">
+            We're sorry to hear you didn't have a great experience with us. We
+            Would really appreciate more information and your feedback so we
+            could improve our service.
           </p>
           <textarea
             value={review}

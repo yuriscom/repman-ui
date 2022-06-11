@@ -53,22 +53,16 @@ const RatePage = ({
         .then((ratePageResult) => ratePageResult.json())
         .then((data) => {
           if (data.status !== 200) {
-            // return errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-            //   window.open(clientWebsite, "_self")
-            // );
-            redirectToTheClientWebsite();
+            redirectToTheClientWebsite(data.error);
+            return;
           }
 
           setUserRate(newUserRate);
           setHash(data.data.hash);
-          // setReviewLink(identifyReviewLink(data.data.reviewLink));
           setActivePage();
         })
         .catch(() => {
-          // errorAlert(DEFAULT_ERROR_MESSAGE).then(() =>
-          //   window.open(clientWebsite, "_self")
-          // )
-          redirectToTheClientWebsite();
+          redirectToTheClientWebsite("Change Rating Error Page");
         });
     }, 300);
   };

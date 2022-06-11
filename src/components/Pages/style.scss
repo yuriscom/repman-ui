@@ -45,9 +45,15 @@
   }
 }
 
-.negative-step__reviewed-header {
-  display: flex;
-  justify-content: center;
+.negative-step__reviewed-text,
+.share-review-text {
+  width: 58%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resitrcitons-word {
+  font-size: 1rem;
 }
 
 /* Positive Step */
@@ -110,6 +116,11 @@
 
   .positive-step .share-review-heading {
     font-size: 2rem !important;
+  }
+
+  .negative-step__reviewed-text,
+  .share-review-text {
+    width: 80%;
   }
 }
 

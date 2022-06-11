@@ -3,7 +3,6 @@ import { RatePage, BadReviewPage, GoodReviewPage } from "../Pages";
 import { useLocation } from "react-router";
 import * as Sentry from "@sentry/react";
 import {
-  // BASE_URL,
   INIT_USER_RATE,
   APP_FLOW_PAGES,
   STEP_API,
@@ -11,13 +10,13 @@ import {
   DEBUG_LINK,
   REVIEW_LINK_IDENTIFIER,
 } from "../../constans";
+import { detectMobile } from "../../utils";
 
 // styles
 import "./style.scss";
 
 // assets
 import defaultLogo from "../../assets/logo.png";
-import { detectMobile } from "../../utils";
 
 const Wrapper = () => {
   const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
@@ -30,16 +29,15 @@ const Wrapper = () => {
 
   const location = useLocation();
 
-  const redirectToTheClientWebsite = (error, link = undefined) => {
+  const redirectToTheClientWebsite = (error, link = clientWebsite) => {
     const errorMsg = error || "Hash is invalid";
-    // Sentry.captureMessage(errorMsg);
-    sendError(errorMsg).then(() => window.open(link || clientWebsite, "_self"));
-    window.open(clientWebsite, "_self");
+    Sentry.captureMessage(errorMsg);
+    window.open(link, "_self");
   };
 
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
 
-  const validateHash = (hash) => {
+  const validateHash = async (hash) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -92,7 +90,7 @@ const Wrapper = () => {
             } = data;
 
             if (status !== 200) {
-              return redirectToTheClientWebsite(null, website);
+              return redirectToTheClientWebsite(data.error, website);
             }
 
             // set Logo image
@@ -132,7 +130,7 @@ const Wrapper = () => {
       const { step } = data;
 
       if (status !== 200) {
-        return redirectToTheClientWebsite();
+        return redirectToTheClientWebsite(data.error);
       }
       setActivePage(step);
     });
@@ -200,11 +198,10 @@ const Wrapper = () => {
   return stepIdentified ? (
     <>
       <div className="page-wrapper">
-        <div className="heading-container">
-          <h1 className="heading uppercase">Please Rate Us</h1>
-        </div>
-        {/* Review Container */}
         <div className="review-container">
+          <div className="heading-container">
+            <h1 className="heading uppercase">Please Rate Us</h1>
+          </div>
           <div className="review-component">
             <div className="logo-container">
               <img src={logoPath} alt="logo" />
@@ -212,11 +209,11 @@ const Wrapper = () => {
             <div className="interaction">{identifyActivePageComponent()}</div>
             <div
               className="website"
-              style={{
+              /* style={{
                 left: activePage !== APP_FLOW_PAGES.RATE_PAGE ? "-22px" : "0",
-              }}
+              }} */
             >
-              {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
+              {/* {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
                 <>
                   <svg
                     type="button"
@@ -246,10 +243,9 @@ const Wrapper = () => {
                       fill="#6B7086"
                     />
                   </svg>
-                  {/* </button> */}
                 </>
-              ) : null}
-              <a href={clientWebsite}>
+              ) : null} */}
+              <a href={clientWebsite} target="_blank">
                 <button type="button" className="pink-button pointer">
                   Visit Our Website
                 </button>
