@@ -11,6 +11,10 @@
   height: calc(100vh - 150px);
 }
 
+.heading-container .heading {
+  margin-bottom: 1rem;
+}
+
 // .heading-container {
 //   display: table-row;
 // }
@@ -30,6 +34,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // margin-top: 1rem;
   // display: table-row;
   // vertical-align: middle;
   // padding: 2rem;
@@ -49,13 +54,8 @@
     border-bottom: solid 1px lightgrey;
 
     img {
-      // old logo settings
-      // width: 250px;
-      // height: 150px;
-
-      // new logo settings
       max-width: 95%;
-      width: 300px;
+      width: 250px;
     }
   }
 

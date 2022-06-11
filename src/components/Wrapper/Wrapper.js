@@ -26,6 +26,7 @@ const Wrapper = () => {
   const [clientWebsite, setClientWebsite] = useState();
   const [stepIdentified, setStepIdentified] = useState(false);
   const [logoPath, setLogoPath] = useState();
+  const [patientName, setPatientName] = useState("");
 
   const location = useLocation();
 
@@ -87,7 +88,9 @@ const Wrapper = () => {
                 linkGoogleMobile,
                 logo,
               },
+              patientDetails: { fullname },
             } = data;
+            console.log(data, "data");
 
             if (status !== 200) {
               return redirectToTheClientWebsite(data.error, website);
@@ -114,6 +117,7 @@ const Wrapper = () => {
               setReviewLink(linkGoogleDesktop);
             }
 
+            setPatientName(fullname);
             setClientWebsite(website);
             setActivePage(step);
           })
@@ -141,6 +145,7 @@ const Wrapper = () => {
       case APP_FLOW_PAGES.RATE_PAGE:
         return (
           <RatePage
+            patientName={patientName}
             userRate={userRate}
             hash={hash}
             clientWebsite={clientWebsite}
@@ -183,6 +188,7 @@ const Wrapper = () => {
       default:
         return (
           <RatePage
+            patientName={patientName}
             userRate={userRate}
             hash={hash}
             clientWebsite={clientWebsite}

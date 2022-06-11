@@ -1,13 +1,6 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
-import {
-  // BASE_URL,
-  // DEFAULT_ERROR_MESSAGE,
-  REVIEW_LINK_IDENTIFIER,
-  STAR_RATING_API,
-  NUMBER_OF_STARS,
-} from "../../constans";
-// import { errorAlert } from "../../utils";
+import { STAR_RATING_API, NUMBER_OF_STARS } from "../../constans";
 
 // styles
 import "./style.scss";
@@ -15,22 +8,12 @@ import "./style.scss";
 const RatePage = ({
   userRate,
   hash,
-  // clientWebsite,
   setUserRate,
   setActivePage,
   setHash,
-  // setReviewLink,
   redirectToTheClientWebsite,
+  patientName,
 }) => {
-  const identifyReviewLink = (link) =>
-    decodeURIComponent(
-      link.slice(
-        link.lastIndexOf(REVIEW_LINK_IDENTIFIER) +
-          REVIEW_LINK_IDENTIFIER.length +
-          1
-      )
-    );
-
   const changeRating = (newUserRate) => {
     setTimeout(() => {
       // send star rating
@@ -69,10 +52,9 @@ const RatePage = ({
 
   return (
     <div className="step-container">
-      <p className="description">
-        We are always looking for ways to improve the quality of our products,
-        services, and customer support. If you have a moment, we would
-        appreciate if you could share your experience with us.
+      <p className="rate-page-text">
+        Hi {patientName}, thanks for visiting us at Wilderman Cosmetic Clinic.
+        We would love some feedback about your experience today!
       </p>
       <StarRatings
         rating={userRate}
