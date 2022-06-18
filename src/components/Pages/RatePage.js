@@ -1,6 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import { STAR_RATING_API, NUMBER_OF_STARS } from "../../constans";
+import SubmitButton from "../Common/SubmitButton";
 
 // styles
 import "./style.scss";
@@ -13,8 +14,9 @@ const RatePage = ({
   setHash,
   redirectToTheClientWebsite,
   patientName,
+  clinicName,
 }) => {
-  const changeRating = (newUserRate) => {
+  const changeRating = () => {
     setTimeout(() => {
       // send star rating
       const myHeaders = new Headers();
@@ -24,7 +26,7 @@ const RatePage = ({
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({
-          rating: newUserRate,
+          rating: userRate,
           userAgent: navigator.userAgent,
         }),
       };
@@ -40,7 +42,7 @@ const RatePage = ({
             return;
           }
 
-          setUserRate(newUserRate);
+          // setUserRate(newUserRate);
           setHash(data.data.hash);
           setActivePage();
         })
@@ -53,17 +55,18 @@ const RatePage = ({
   return (
     <div className="step-container">
       <p className="rate-page-text">
-        Hi {patientName}, thanks for visiting us at Wilderman Cosmetic Clinic.
-        We would love some feedback about your experience today!
+        Hi{`${patientName ? " " : ""}${patientName}`}, thanks for visiting us at{" "}
+        {clinicName}. We would love some feedback about your experience today!
       </p>
       <StarRatings
         rating={userRate}
         starRatedColor="#f4cc1c"
-        changeRating={changeRating}
+        changeRating={setUserRate}
         numberOfStars={NUMBER_OF_STARS}
         starSpacing="0.3rem"
         starHoverColor="#f4cc1c"
       />
+      <SubmitButton onSubmit={changeRating} />
     </div>
   );
 };

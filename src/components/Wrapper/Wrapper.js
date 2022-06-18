@@ -24,9 +24,12 @@ const Wrapper = () => {
   const [reviewLink, setReviewLink] = useState("");
   const [hash, setHash] = useState();
   const [clientWebsite, setClientWebsite] = useState();
+  const [clinicUname, setClinicUname] = useState();
+  const [clinicName, setClinicName] = useState();
   const [stepIdentified, setStepIdentified] = useState(false);
   const [logoPath, setLogoPath] = useState();
   const [patientName, setPatientName] = useState("");
+  const [badReviewPageReviewed, setBadReviewPageReviewed] = useState(false);
 
   const location = useLocation();
 
@@ -77,23 +80,21 @@ const Wrapper = () => {
       if (hash !== "") {
         setHash(hash);
         validateHash(hash)
-          .then(({ status, error, data }) => {
+          .then(({ status, data }) => {
             const {
               step,
-              forwardToUrl,
-
               clientDetails: {
                 website,
                 linkGoogleDesktop,
                 linkGoogleMobile,
                 logo,
+                uname,
+                name,
               },
               patientDetails: { fullname },
             } = data;
-            console.log(data, "data");
-
             if (status !== 200) {
-              return redirectToTheClientWebsite(data.error, website);
+              return redirectToTheClientWebsite(data?.error, website);
             }
 
             // set Logo image
@@ -102,6 +103,9 @@ const Wrapper = () => {
                 ? `https://reviewclever.com/static/media/${logo}`
                 : defaultLogo
             );
+
+            setClinicUname(uname);
+            setClinicName(name);
             // if we get this link right onload, we have to redirect a user
             if (data[REVIEW_LINK_IDENTIFIER]) {
               setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
@@ -121,7 +125,7 @@ const Wrapper = () => {
             setClientWebsite(website);
             setActivePage(step);
           })
-          .catch((error) => redirectToTheClientWebsite(error));
+          .catch((error) => redirectToTheClientWebsite(error.message));
       } else {
         return redirectToTheClientWebsite();
       }
@@ -134,7 +138,7 @@ const Wrapper = () => {
       const { step } = data;
 
       if (status !== 200) {
-        return redirectToTheClientWebsite(data.error);
+        return redirectToTheClientWebsite(data?.error);
       }
       setActivePage(step);
     });
@@ -149,6 +153,7 @@ const Wrapper = () => {
             userRate={userRate}
             hash={hash}
             clientWebsite={clientWebsite}
+            clinicName={clinicName}
             setUserRate={setUserRate}
             setActivePage={handleActivePage}
             setReviewLink={setReviewLink}
@@ -167,6 +172,8 @@ const Wrapper = () => {
             setUserRate={setUserRate}
             resetActivePage={resetActivePage}
             redirectToTheClientWebsite={redirectToTheClientWebsite}
+            badReviewPageReviewed={badReviewPageReviewed}
+            setBadReviewPageReviewed={setBadReviewPageReviewed}
           />
         );
 
@@ -189,6 +196,7 @@ const Wrapper = () => {
         return (
           <RatePage
             patientName={patientName}
+            clinicName={clinicName}
             userRate={userRate}
             hash={hash}
             clientWebsite={clientWebsite}
@@ -202,24 +210,28 @@ const Wrapper = () => {
   };
 
   return stepIdentified ? (
-    <>
+    <div className={`${clinicUname}-container`}>
+      <div className="logo-container">
+        <img src={logoPath} alt="logo" />
+      </div>
+
       <div className="page-wrapper">
         <div className="review-container">
-          <div className="heading-container">
-            <h1 className="heading uppercase">Please Rate Us</h1>
-          </div>
           <div className="review-component">
-            <div className="logo-container">
-              <img src={logoPath} alt="logo" />
-            </div>
+            {activePage === APP_FLOW_PAGES.BAD_REVIEW_PAGE &&
+            badReviewPageReviewed ? null : (
+              <div className="heading-container">
+                <h1 className="heading">Please Rate Us</h1>
+              </div>
+            )}
             <div className="interaction">{identifyActivePageComponent()}</div>
-            <div
+            {/* <div
               className="website"
-              /* style={{
+               style={{
                 left: activePage !== APP_FLOW_PAGES.RATE_PAGE ? "-22px" : "0",
-              }} */
-            >
-              {/* {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
+              }} 
+            > */}
+            {/* {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
                 <>
                   <svg
                     type="button"
@@ -251,12 +263,31 @@ const Wrapper = () => {
                   </svg>
                 </>
               ) : null} */}
-              <a href={clientWebsite} target="_blank">
-                <button type="button" className="pink-button pointer">
+
+            {/* <button
+                type="button"
+                className="action-button submit-button pointer"
+              >
+                Submit
+              </button>
+
+              <a
+                href={clientWebsite}
+                target="_blank"
+                className="visit-our-website-link"
+              >
+                <button
+                  type="button"
+                  className="pink-button pointer"
+                  onClick={onSubmitButton}
+                >
                   Visit Our Website
                 </button>
               </a>
             </div>
+          </div>
+        </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
@@ -264,22 +295,33 @@ const Wrapper = () => {
       <footer className="footer">
         <div className="footer-content-container">
           <p className="text">
-            8054 Yonge Street, Thornhill, ON L4J 1W3, Canada <br /> Mon - Fri:
-            9:00am - 7:00pm
+            <span className="footer-address">
+              8054 Yonge Street, Thornhill, ON L4J 1W3 <br />
+            </span>
+            First Floor
           </p>
           <p className="text">
-            Mon - Fri: 9:00am - 7:00pm
-            <br />
-            +1 (807) 770-1743
+            <span className="footer-time">
+              Mon - Fri: 9:00am - 7:00pm
+              <br />
+            </span>
+            <span className="footer-number"> +1 (807) 770-1743 </span>
           </p>
-          <a href={`${clientWebsite}${APPOINTMENT_LINK}`} target="_blank">
-            <button type="button" className="navy-button pointer">
+          <a
+            href={`${clientWebsite}${APPOINTMENT_LINK}`}
+            target="_blank"
+            className="footer-schedule-appt-button"
+          >
+            <button
+              type="button"
+              className="schedule-appointment-button pointer"
+            >
               Schedule Appointment
             </button>
           </a>
         </div>
       </footer>
-    </>
+    </div>
   ) : null;
 };
 

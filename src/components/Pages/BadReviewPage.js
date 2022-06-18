@@ -4,9 +4,8 @@ import {
   APP_FLOW_PAGES,
   INIT_USER_RATE,
   REVIEW_API,
-  // BASE_URL,
 } from "../../constans";
-// import { errorAlert } from "../../utils";
+import SubmitButton from "../Common/SubmitButton";
 
 // styles
 import "./style.scss";
@@ -16,10 +15,10 @@ const BadReviewPage = ({
   setUserRate,
   resetActivePage,
   redirectToTheClientWebsite,
+  badReviewPageReviewed,
+  setBadReviewPageReviewed,
 }) => {
   const [review, setReview] = useState("");
-  const [referenceNumber, setReferenceNumber] = useState("");
-  const [isReviewed, setIsReviewed] = useState(true);
 
   const handleSubmit = () => {
     const myHeaders = new Headers();
@@ -42,8 +41,7 @@ const BadReviewPage = ({
           return;
         }
 
-        setReferenceNumber(data.data.referenceNo);
-        setIsReviewed(true);
+        setBadReviewPageReviewed(true);
       })
       .catch(() => {
         redirectToTheClientWebsite("Bad Review Page Error");
@@ -83,32 +81,27 @@ const BadReviewPage = ({
 
   return (
     <div className="step-container negative-step">
-      {isReviewed ? (
+      {badReviewPageReviewed ? (
         <>
           <div className="negative-step__reviewed-header">
             <h2 className="heading pb-0 ml-1">Thank you!</h2>
-            <p>
-              Your opinion is important to us.
-              {/* Dear client, we received your review, our customer care team will
-              investigate it.
-              <br /> We will contact you as soon as possible.
-              <br /> Your reference number is <strong>{referenceNumber}</strong>
-              . */}
-            </p>
+            <p>Your opinion is important to us.</p>
           </div>
         </>
       ) : (
         <>
           <p className="negative-step__reviewed-text">
             We're sorry to hear you didn't have a great experience with us. We
-            Would really appreciate more information and your feedback so we
+            would really appreciate more information and your feedback so we
             could improve our service.
           </p>
           <textarea
             value={review}
+            placeholder="Your message"
             onChange={(event) => setReview(event.target.value)}
           />
-          <div className="button-group">
+          <SubmitButton onSubmit={handleSubmit} />
+          {/* <div className="button-group">
             <GoBackButton style="mr-5" />
             <div className="tooltip">
               <button
@@ -127,7 +120,7 @@ const BadReviewPage = ({
                 )}
               </button>
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>

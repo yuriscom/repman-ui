@@ -4,28 +4,79 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // display: table;
+  flex-direction: column;
   max-width: $max-container-width;
-  // width: 100%;
   margin: 0 auto;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 245px);
+}
+
+@media screen and (min-width: 1200px) {
+  .logo-container {
+    height: 120px !important;
+  }
+
+  .page-wrapper {
+    height: calc(100vh - 280px);
+  }
 }
 
 .heading-container .heading {
   margin-bottom: 1rem;
 }
 
-// .heading-container {
-//   display: table-row;
-// }
-
 .heading {
-  // display: table-cell;
-  // vertical-align: bottom;
-  font-family: "HenrietteBold";
-  color: $dark-blue;
-  // padding-bottom: 1rem;
+  font-family: "PoppinsRegular";
   text-align: center;
+  font-weight: lighter;
+}
+
+.action-button span {
+  position: relative;
+  top: 2px;
+}
+
+// colors by clinic name
+.undefined-container,
+.default-container,
+.cosmetic-container {
+  .heading {
+    color: #803d6e;
+  }
+
+  .action-button,
+  .schedule-appointment-button {
+    color: white;
+    background-color: #803d6e !important;
+  }
+
+  .footer-number,
+  .footer-address {
+    color: #bb80ab;
+  }
+}
+
+.accuro-container {
+  .heading {
+    color: #387d91;
+  }
+
+  .action-button,
+  .schedule-appointment-button {
+    color: white;
+    background-color: #54646d !important;
+  }
+}
+
+.imaging-container {
+  .heading {
+    color: #019494;
+  }
+
+  .action-button,
+  .schedule-appointment-button {
+    color: white;
+    background: #019494 !important;
+  }
 }
 
 /* review-component component */
@@ -34,17 +85,36 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 90%;
+  max-height: 100%;
   // margin-top: 1rem;
   // display: table-row;
   // vertical-align: middle;
   // padding: 2rem;
 }
 
+.logo-container {
+  display: flex;
+  height: 89px;
+  justify-content: center;
+  background: white;
+  width: 100vw;
+  margin-bottom: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+  border-bottom: 2px solid lightgray;
+}
+
 .review-component {
-  max-width: 72rem;
+  height: 400px;
+  // max-width: 72rem;
+  max-width: 50rem;
   width: 90%;
+  max-height: 100%;
+  overflow: scroll;
   margin: auto;
-  border: solid 1px lightgray;
+  border: solid 2px lightgray;
   border-radius: 1rem !important;
   background-color: $white;
 
@@ -54,14 +124,14 @@
     border-bottom: solid 1px lightgrey;
 
     img {
-      max-width: 95%;
-      width: 250px;
+      // max-width: 95%;
+      max-width: 250px;
     }
   }
 
   .interaction {
-    background-color: #f0f1f7;
-    border-bottom: solid 1px lightgray;
+    // background-color: #f0f1f7;
+    // border-bottom: solid 1px lightgray;
   }
 
   .website {
@@ -87,9 +157,10 @@
 
 .footer {
   height: 120px;
-  margin-top: 30px;
+  // margin-top: 30px;
   background-color: $white;
-  box-shadow: 5px 1px 5px rgb(34 36 38 / 15%);
+  border-top: 2px solid lightgray;
+  // box-shadow: 5px 1px 5px rgb(34 36 38 / 15%);
 }
 
 .footer-content-container {
@@ -105,7 +176,7 @@
     color: $dark-blue;
   }
 
-  .navy-button {
+  .schedule-appointment-button {
     width: 300px !important;
     height: 50px !important;
     padding: 1rem 3rem !important;
@@ -121,29 +192,36 @@
 @media screen and (max-width: 991px) {
   .footer-content-container {
     .text,
-    .navy-button {
+    .schedule-appointment-button {
       font-size: 1rem;
     }
 
-    .navy-button {
+    .schedule-appointment-button {
       padding: 1rem 2rem !important;
+      width: 250px !important;
     }
   }
 }
 
 @media screen and (max-width: 767px) {
   .page-wrapper {
-    height: 100%;
-    padding-top: 1.5rem;
+    height: calc(100vh - 300px);
   }
+  // .page-wrapper {
+  //   height: 100%;
+  //   padding-top: 0;
+  //   // padding-top: 1.5rem;
+  // }
 
   .heading {
-    font-size: 2rem !important;
+    font-size: 26px !important;
   }
 
   .footer {
+    margin-top: 0;
     background: transparent;
     box-shadow: none;
+    border-top: 0;
   }
 
   .footer-content-container {
@@ -154,23 +232,71 @@
       text-align: left;
       width: 100%;
       padding-left: 5rem;
+      font-size: 1.1rem;
+      margin-bottom: 0;
     }
 
-    .navy-button {
+    .schedule-appointment-button {
       margin-top: 1rem;
       margin-bottom: 2rem;
       padding: 1rem 3rem !important;
     }
   }
+
+  .footer-schedule-appt-button,
+  .footer-time,
+  .visit-our-website-link {
+    display: none;
+  }
+
+  .logo-container {
+    background: white;
+    width: 100vw;
+    margin: auto;
+    text-align: center;
+    // height: 100px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+
+    img {
+      max-height: 100%;
+      max-width: 250px;
+    }
+  }
+
+  .review-component {
+    width: 100%;
+    border-width: 2px;
+  }
 }
 
 @media screen and (max-width: 390px) {
-  .review-component .logo-container {
-    padding: 0 !important;
+  .heading {
+    font-size: 24px !important;
   }
 
-  .footer-content-container .text {
-    padding-left: 2rem;
+  .logo-container {
+    padding: 0.5rem !important;
+    height: 80px;
+  }
+
+  .page-wrapper {
+    height: calc(100vh - 265px);
+  }
+
+  .footer-content-container {
+    padding-top: 0;
+
+    .text {
+      padding-left: 2.5rem;
+    }
+  }
+
+  .footer {
+    height: auto;
   }
 }
 

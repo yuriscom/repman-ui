@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 
 .step-container {
-  padding: 1rem 2rem;
+  // padding: 1rem 2rem;
   text-align: center;
   font: normal normal 1.25rem/1.4 "HelveticaLight";
   color: $dark-blue;
@@ -26,12 +26,18 @@
     padding: 0.5rem;
     background-color: $white;
     border: solid 1px $black;
-    height: 7.5rem;
-    margin-bottom: 1rem;
-    width: 100%;
+    height: 5.5rem;
+    // margin-bottom: 1rem;
+    width: 90%;
     resize: none;
     border-color: lightgray;
-    border-radius: 5px;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    color: #545871;
+
+    &::placeholder {
+      opacity: 0.6 !important;
+    }
   }
 
   .button-group {
@@ -45,16 +51,18 @@
   width: 62%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
 }
 
 .negative-step__reviewed-text,
 .share-review-text {
-  width: 58%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
 }
 
-.resitrcitons-word {
+.restrictions-word {
   font-size: 1rem;
 }
 
@@ -80,14 +88,31 @@
   }
 }
 
+.star-ratings {
+  margin-top: 1.5rem;
+}
+
+.step-container .widget-svg {
+  width: 4.5rem !important;
+  height: 4.5rem !important;
+}
+
 @media screen and (max-width: 991px) {
-  .step-container .widget-svg {
-    width: 5rem !important;
-    height: 5rem !important;
+  .footer-content-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .schedule-appointment-button {
+    width: 225px !important;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .star-ratings {
+    margin-top: 1rem;
+  }
+
   .step-container {
     padding: 0.5rem;
     .widget-svg {
@@ -109,6 +134,10 @@
         margin-bottom: 1rem !important;
       }
     }
+
+    .negative-step__reviewed-text {
+      margin-bottom: 0;
+    }
   }
 
   .positive-step .share-review-heading {
@@ -118,11 +147,56 @@
   .negative-step__reviewed-text,
   .share-review-text,
   .rate-page-text {
-    width: 80%;
+    width: 90%;
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 380px) {
+  .star-ratings {
+    margin-top: 1rem;
+  }
+
+  .step-container {
+    font-size: 1.1rem !important;
+  }
+
+  .page-wrapper {
+    height: 100% !important;
+  }
+
+  .review-container {
+    margin-top: 1rem;
+    display: block;
+  }
+
+  .review-component {
+    // height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .footer-content-container {
+    padding-top: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .step-container .widget-svg {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .page-wrapper {
+    height: 100% !important;
+  }
+
+  .logo-container {
+    height: 75px !important;
+  }
+}
+
+@media screen and (max-width: 305px) {
   .step-container .widget-svg {
     width: 1.5rem !important;
     height: 1.5rem !important;

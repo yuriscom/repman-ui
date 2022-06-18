@@ -5,6 +5,7 @@ import {
   INIT_USER_RATE,
   APP_FLOW_PAGES,
 } from "../../constans";
+import SubmitButton from "../Common/SubmitButton";
 // import { errorAlert } from "../../utils";
 
 // styles
@@ -52,7 +53,7 @@ const GoodReviewPage = ({
         Thank you for your feedback, we are so happy you enjoyed your visit.
         Please share this on Google reviews to receive 5,000 reward points,
         redeemable at our clinic. <br />{" "}
-        <span className="resitrcitons-word"> (restrictions apply)</span>
+        <span className="restrictions-word"> (restrictions apply)</span>
       </p>
       {/* <h2 className="share-review-heading">Share your review!</h2> */}
       {/* <a
@@ -63,14 +64,18 @@ const GoodReviewPage = ({
       >
         Post a review
       </a> */}
-      <button
+      {/* <button
         target="_blank"
         className="action-button go-back-button pointer mt-1"
         href={reviewLink}
         onClick={() => sendAcknowledgeLinkAndRedirect()}
       >
         Post a review
-      </button>
+      </button> */}
+      <SubmitButton
+        onSubmit={sendAcknowledgeLinkAndRedirect}
+        text="Post a review"
+      />
       {/* <button
         type="button"
         className="action-button go-back-button pointer display-sm-none mt-1"
