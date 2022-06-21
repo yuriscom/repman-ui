@@ -112,7 +112,7 @@
   max-width: 50rem;
   width: 90%;
   max-height: 100%;
-  overflow: scroll;
+  // overflow: scroll;
   margin: auto;
   border: solid 2px lightgray;
   border-radius: 1rem !important;
@@ -189,7 +189,18 @@
   }
 }
 
+@media screen and (max-width: 1199px) {
+  .review-component {
+    overflow: hidden;
+    max-height: 95%;
+  }
+}
+
 @media screen and (max-width: 991px) {
+  .review-component {
+    height: 440px;
+  }
+
   .footer-content-container {
     .text,
     .schedule-appointment-button {
@@ -204,14 +215,13 @@
 }
 
 @media screen and (max-width: 767px) {
-  .page-wrapper {
-    height: calc(100vh - 300px);
+  .footer-content-container {
+    width: 90%;
   }
-  // .page-wrapper {
-  //   height: 100%;
-  //   padding-top: 0;
-  //   // padding-top: 1.5rem;
-  // }
+
+  .page-wrapper {
+    height: calc(100vh - 250px);
+  }
 
   .heading {
     font-size: 26px !important;
@@ -231,7 +241,7 @@
     .text {
       text-align: left;
       width: 100%;
-      padding-left: 5rem;
+      padding-left: 1.5rem;
       font-size: 1.1rem;
       margin-bottom: 0;
     }
@@ -254,7 +264,6 @@
     width: 100vw;
     margin: auto;
     text-align: center;
-    // height: 100px;
     margin-bottom: 0;
     display: flex;
     align-items: center;
@@ -273,7 +282,11 @@
   }
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 415px) {
+  .review-component {
+    height: 350px;
+  }
+
   .heading {
     font-size: 24px !important;
   }
@@ -291,7 +304,7 @@
     padding-top: 0;
 
     .text {
-      padding-left: 2.5rem;
+      padding-left: 1.5rem;
     }
   }
 
@@ -300,7 +313,11 @@
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 325px) {
+  .review-component {
+    height: 325px;
+  }
+
   .website {
     justify-content: flex-end;
   }

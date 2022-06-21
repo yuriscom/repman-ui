@@ -164,8 +164,6 @@ button {
 
 .action-button {
   font: normal normal 1rem "HelveticaLight";
-  // color: $white;
-  // // background-color: $dark-blue;
   border-radius: 2rem;
   border: none;
   outline: none;
@@ -184,7 +182,6 @@ button {
 }
 
 // colors by clinic name
-
 .cosmetic-container {
   .heading {
     color: #803d6e;
@@ -204,10 +201,6 @@ button {
 
 @media screen and (max-width: 767px) {
 
-  body {
-    // overflow: auto;
-  }
-
   .display-sm-none {
     display: none !important;
   }
@@ -224,7 +217,7 @@ button {
   .go-back-button-sm-screen {
     display: block;
     // padding: 0;
-    // // margin-right: 300px;
+    // margin-right: 300px;
     // width: 0;
     position: relative;
     left: -18px;
@@ -253,15 +246,12 @@ button {
   // }
 }
 
-
-
 @media screen and (max-width: 414px) {
   p,
   .footer-content-container .text {
     font-size: 1rem !important;
   }
 }
-
 
 @media screen and (max-width: 320px) {
   p,

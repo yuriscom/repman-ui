@@ -10,13 +10,13 @@ import {
   DEBUG_LINK,
   REVIEW_LINK_IDENTIFIER,
 } from "../../constans";
-import { detectMobile } from "../../utils";
+import { detectMobile, getFloorFromAddress } from "../../utils";
 
 // styles
 import "./style.scss";
 
 // assets
-import defaultLogo from "../../assets/logo.png";
+import defaultLogo from "../../assets/accurateImage.png";
 
 const Wrapper = () => {
   const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
@@ -30,13 +30,17 @@ const Wrapper = () => {
   const [logoPath, setLogoPath] = useState();
   const [patientName, setPatientName] = useState("");
   const [badReviewPageReviewed, setBadReviewPageReviewed] = useState(false);
+  const [clinicPhone, setClinicPhone] = useState();
+  const [clinicAddress, setClinicAddress] = useState();
+  const [clinicFloor, setClinicFloor] = useState();
 
   const location = useLocation();
 
   const redirectToTheClientWebsite = (error, link = clientWebsite) => {
-    const errorMsg = error || "Hash is invalid";
-    Sentry.captureMessage(errorMsg);
-    window.open(link, "_self");
+    console.log(error, "errror");
+    // const errorMsg = error || "Hash is invalid";
+    // Sentry.captureMessage(errorMsg);
+    // window.open(link, "_self");
   };
 
   const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
@@ -90,6 +94,7 @@ const Wrapper = () => {
                 logo,
                 uname,
                 name,
+                additionalDetails: { phone, address },
               },
               patientDetails: { fullname },
             } = data;
@@ -104,8 +109,14 @@ const Wrapper = () => {
                 : defaultLogo
             );
 
+            const { modifiedAddress, floorInfo } = getFloorFromAddress(address);
+
+            setClinicAddress(modifiedAddress);
+            setClinicFloor(floorInfo);
+            setClinicPhone(phone);
             setClinicUname(uname);
             setClinicName(name);
+          
             // if we get this link right onload, we have to redirect a user
             if (data[REVIEW_LINK_IDENTIFIER]) {
               setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
@@ -296,16 +307,17 @@ const Wrapper = () => {
         <div className="footer-content-container">
           <p className="text">
             <span className="footer-address">
-              8054 Yonge Street, Thornhill, ON L4J 1W3 <br />
+              {clinicAddress} <br />
             </span>
-            First Floor
+            {clinicFloor}
+            {/* First Floor */}
           </p>
           <p className="text">
             <span className="footer-time">
               Mon - Fri: 9:00am - 7:00pm
               <br />
             </span>
-            <span className="footer-number"> +1 (807) 770-1743 </span>
+            <span className="footer-number"> {clinicPhone} </span>
           </p>
           <a
             href={`${clientWebsite}${APPOINTMENT_LINK}`}
