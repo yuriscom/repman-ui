@@ -37,13 +37,10 @@ const Wrapper = () => {
   const location = useLocation();
 
   const redirectToTheClientWebsite = (error, link = clientWebsite) => {
-    console.log(error, "errror");
-    // const errorMsg = error || "Hash is invalid";
-    // Sentry.captureMessage(errorMsg);
-    // window.open(link, "_self");
+    const errorMsg = error || "Hash is invalid";
+    Sentry.captureMessage(errorMsg);
+    window.open(link, "_self");
   };
-
-  const resetActivePage = () => setActivePage(APP_FLOW_PAGES.RATE_PAGE);
 
   const validateHash = async (hash) => {
     const myHeaders = new Headers();
@@ -116,7 +113,7 @@ const Wrapper = () => {
             setClinicPhone(phone);
             setClinicUname(uname);
             setClinicName(name);
-          
+
             // if we get this link right onload, we have to redirect a user
             if (data[REVIEW_LINK_IDENTIFIER]) {
               setReviewLink(data[REVIEW_LINK_IDENTIFIER]);
@@ -155,23 +152,23 @@ const Wrapper = () => {
     });
   };
 
+  const RatePageWithProps = () => (
+    <RatePage
+      patientName={patientName}
+      userRate={userRate}
+      hash={hash}
+      clinicName={clinicName}
+      setUserRate={setUserRate}
+      setActivePage={handleActivePage}
+      setHash={setHash}
+      redirectToTheClientWebsite={redirectToTheClientWebsite}
+    />
+  );
+
   const identifyActivePageComponent = () => {
     switch (activePage) {
       case APP_FLOW_PAGES.RATE_PAGE:
-        return (
-          <RatePage
-            patientName={patientName}
-            userRate={userRate}
-            hash={hash}
-            clientWebsite={clientWebsite}
-            clinicName={clinicName}
-            setUserRate={setUserRate}
-            setActivePage={handleActivePage}
-            setReviewLink={setReviewLink}
-            setHash={setHash}
-            redirectToTheClientWebsite={redirectToTheClientWebsite}
-          />
-        );
+        return <RatePageWithProps />;
 
       case APP_FLOW_PAGES.BAD_REVIEW_PAGE:
       case APP_FLOW_PAGES.CLAIM_REFERENCE_PAGE:
@@ -179,9 +176,6 @@ const Wrapper = () => {
           <BadReviewPage
             hash={hash}
             clientWebsite={clientWebsite}
-            setActivePage={handleActivePage}
-            setUserRate={setUserRate}
-            resetActivePage={resetActivePage}
             redirectToTheClientWebsite={redirectToTheClientWebsite}
             badReviewPageReviewed={badReviewPageReviewed}
             setBadReviewPageReviewed={setBadReviewPageReviewed}
@@ -193,36 +187,47 @@ const Wrapper = () => {
         return (
           <GoodReviewPage
             reviewLink={reviewLink}
+            clinicUname={clinicUname}
             hash={hash}
-            userRate={userRate}
-            clientWebsite={clientWebsite}
             setActivePage={handleActivePage}
             setUserRate={setUserRate}
-            resetActivePage={resetActivePage}
             redirectToTheClientWebsite={redirectToTheClientWebsite}
           />
         );
 
       default:
-        return (
-          <RatePage
-            patientName={patientName}
-            clinicName={clinicName}
-            userRate={userRate}
-            hash={hash}
-            clientWebsite={clientWebsite}
-            setUserRate={setUserRate}
-            setActivePage={setActivePage}
-            setReviewLink={setReviewLink}
-            setHash={setHash}
-          />
-        );
+        return <RatePageWithProps />;
     }
   };
 
   return stepIdentified ? (
     <div className={`${clinicUname}-container`}>
       <div className="logo-container">
+        {activePage !== APP_FLOW_PAGES.RATE_PAGE && !badReviewPageReviewed && (
+          <>
+            <button
+              className="arrow-left"
+              onClick={() => setActivePage(APP_FLOW_PAGES.RATE_PAGE)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="7.881"
+                height="14.348"
+                viewBox="0 0 7.881 14.348"
+              >
+                <path
+                  id="Path_29"
+                  data-name="Path 29"
+                  d="M576.728,27.344l-6.82,6.82,6.82,6.82"
+                  transform="translate(-569.2 -26.99)"
+                  fill="none"
+                  stroke="#707070"
+                  stroke-width="1"
+                />
+              </svg>
+            </button>
+          </>
+        )}
         <img src={logoPath} alt="logo" />
       </div>
 
@@ -236,69 +241,6 @@ const Wrapper = () => {
               </div>
             )}
             <div className="interaction">{identifyActivePageComponent()}</div>
-            {/* <div
-              className="website"
-               style={{
-                left: activePage !== APP_FLOW_PAGES.RATE_PAGE ? "-22px" : "0",
-              }} 
-            > */}
-            {/* {activePage !== APP_FLOW_PAGES.RATE_PAGE ? (
-                <>
-                  <svg
-                    type="button"
-                    width="44"
-                    height="44"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    version="1.1"
-                    className="go-back-button-sm-screen"
-                    onClick={() => {
-                      // set to the first step
-                      resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
-                      setUserRate(INIT_USER_RATE);
-                    }}
-                  >
-                    <rect
-                      x=".5"
-                      y=".5"
-                      width="43"
-                      height="40"
-                      rx="21.5"
-                      fill="#F8EBEA"
-                      stroke="#D4D1D1"
-                    />
-                    <path
-                      d="M26 21.495v1.01h-6.06l2.777 2.778L22 26l-4-4 4-4 .717.717-2.778 2.778H26z"
-                      fill="#6B7086"
-                    />
-                  </svg>
-                </>
-              ) : null} */}
-
-            {/* <button
-                type="button"
-                className="action-button submit-button pointer"
-              >
-                Submit
-              </button>
-
-              <a
-                href={clientWebsite}
-                target="_blank"
-                className="visit-our-website-link"
-              >
-                <button
-                  type="button"
-                  className="pink-button pointer"
-                  onClick={onSubmitButton}
-                >
-                  Visit Our Website
-                </button>
-              </a>
-            </div>
-          </div>
-        </div> */}
-            {/* </div> */}
           </div>
         </div>
       </div>
@@ -310,14 +252,21 @@ const Wrapper = () => {
               {clinicAddress} <br />
             </span>
             {clinicFloor}
-            {/* First Floor */}
           </p>
           <p className="text">
             <span className="footer-time">
               Mon - Fri: 9:00am - 7:00pm
               <br />
             </span>
-            <span className="footer-number"> {clinicPhone} </span>
+
+            <span className="footer-number">
+              <a
+                href={`tel:${clinicPhone}`}
+                aria-label={clinicPhone ? clinicPhone.split("").join(" ") : ""}
+              >
+                {clinicPhone}
+              </a>
+            </span>
           </p>
           <a
             href={`${clientWebsite}${APPOINTMENT_LINK}`}

@@ -30,3 +30,16 @@ export const APP_FLOW_PAGES = {
   FORWARD: "FORWARD",
   CLAIM_REFERENCE_PAGE: "CLAIM_REFERENCE_PAGE",
 };
+
+export const GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME = {
+  accuro: `Thank you for your feedback, we are so happy you enjoyed your visit.
+          Please share this on Google reviews.`,
+
+  cosmetic: `Thank you for your feedback, we are so happy you enjoyed your visit.
+  Please share this on Google reviews to receive 5,000 reward points,
+  redeemable at our clinic.
+  `,
+};
+
+GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME.accuro =
+  GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME.imaging;

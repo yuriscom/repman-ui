@@ -129,11 +129,6 @@
     }
   }
 
-  .interaction {
-    // background-color: #f0f1f7;
-    // border-bottom: solid 1px lightgray;
-  }
-
   .website {
     display: flex;
     flex-direction: row;
@@ -143,7 +138,6 @@
   }
 
   .pink-button {
-    // padding: 0.75rem 3rem;
     font: normal normal 1rem "HelveticaLight";
     color: $dark-blue;
     background-color: #f7eceb;
@@ -151,6 +145,17 @@
     border: solid 1px lightgray;
     outline: none;
   }
+}
+
+.arrow-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px !important;
+  height: 100% !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 /* Footer */
@@ -283,8 +288,12 @@
 }
 
 @media screen and (max-width: 415px) {
+  // .review-component {
+  //   height: 350px;
+  // }
+
   .review-component {
-    height: 350px;
+    height: 400px;
   }
 
   .heading {
@@ -308,15 +317,15 @@
     }
   }
 
-  .footer {
-    height: auto;
-  }
+  // .footer {
+  //   height: auto;
+  // }
 }
 
 @media screen and (max-width: 325px) {
-  .review-component {
-    height: 325px;
-  }
+  // .review-component {
+  //   height: 325px;
+  // }
 
   .website {
     justify-content: flex-end;

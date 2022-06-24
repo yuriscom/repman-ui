@@ -7,14 +7,15 @@ import SubmitButton from "../Common/SubmitButton";
 import "./style.scss";
 
 const RatePage = ({
+  patientName,
   userRate,
   hash,
+  clinicName,
   setUserRate,
   setActivePage,
   setHash,
   redirectToTheClientWebsite,
-  patientName,
-  clinicName,
+  
 }) => {
   const changeRating = () => {
     setTimeout(() => {

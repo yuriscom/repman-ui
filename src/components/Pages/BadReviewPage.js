@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  FEEDBACK_MIN_LENGTH,
-  APP_FLOW_PAGES,
-  INIT_USER_RATE,
-  REVIEW_API,
-} from "../../constans";
+import { REVIEW_API } from "../../constans";
 import SubmitButton from "../Common/SubmitButton";
 
 // styles
@@ -12,8 +7,6 @@ import "./style.scss";
 
 const BadReviewPage = ({
   hash,
-  setUserRate,
-  resetActivePage,
   redirectToTheClientWebsite,
   badReviewPageReviewed,
   setBadReviewPageReviewed,
@@ -48,37 +41,6 @@ const BadReviewPage = ({
       });
   };
 
-  const submitButtonDisabled = review.length < FEEDBACK_MIN_LENGTH;
-
-  const GoBackButton = ({ style }) => (
-    <>
-      {/* computer screen */}
-      <button
-        type="button"
-        className={`action-button go-back-button pointer display-sm-none  ${
-          style || ""
-        }`}
-        onClick={() => {
-          // set to the first step
-          resetActivePage(APP_FLOW_PAGES.RATE_PAGE);
-          setUserRate(INIT_USER_RATE);
-        }}
-      >
-        <svg
-          width="24"
-          height="24"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="white"
-          className="go-back-arrow"
-        >
-          <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
-        </svg>
-
-        <div>Go Back</div>
-      </button>
-    </>
-  );
-
   return (
     <div className="step-container negative-step">
       {badReviewPageReviewed ? (
@@ -101,26 +63,6 @@ const BadReviewPage = ({
             onChange={(event) => setReview(event.target.value)}
           />
           <SubmitButton onSubmit={handleSubmit} />
-          {/* <div className="button-group">
-            <GoBackButton style="mr-5" />
-            <div className="tooltip">
-              <button
-                type="button"
-                className={`action-button submit-button  ${
-                  submitButtonDisabled ? "disabled-button" : "pointer"
-                }`}
-                disabled={submitButtonDisabled}
-                onClick={handleSubmit}
-              >
-                Submit Feedback
-                {submitButtonDisabled && (
-                  <span className="tooltip-text">
-                    Please make sure you typed more than 10 characters.
-                  </span>
-                )}
-              </button>
-            </div>
-          </div> */}
         </>
       )}
     </div>
