@@ -37,9 +37,9 @@ const Wrapper = () => {
   const location = useLocation();
 
   const redirectToTheClientWebsite = (error, link = clientWebsite) => {
-    const errorMsg = error || "Hash is invalid";
-    Sentry.captureMessage(errorMsg);
-    window.open(link, "_self");
+    // const errorMsg = error || "Hash is invalid";
+    // Sentry.captureMessage(errorMsg);
+    // window.open(link, "_self");
   };
 
   const validateHash = async (hash) => {
@@ -132,6 +132,10 @@ const Wrapper = () => {
             setPatientName(fullname);
             setClientWebsite(website);
             setActivePage(step);
+            // it's reviewed if page is equal to claim reference page
+            setBadReviewPageReviewed(
+              step === APP_FLOW_PAGES.CLAIM_REFERENCE_PAGE
+            );
           })
           .catch((error) => redirectToTheClientWebsite(error.message));
       } else {
@@ -234,7 +238,8 @@ const Wrapper = () => {
       <div className="page-wrapper">
         <div className="review-container">
           <div className="review-component">
-            {activePage === APP_FLOW_PAGES.BAD_REVIEW_PAGE &&
+            {(activePage === APP_FLOW_PAGES.BAD_REVIEW_PAGE ||
+              activePage === APP_FLOW_PAGES.CLAIM_REFERENCE_PAGE) &&
             badReviewPageReviewed ? null : (
               <div className="heading-container">
                 <h1 className="heading">Please Rate Us</h1>
