@@ -29,11 +29,10 @@ const BadReviewPage = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, 'datadata');
-        // if (data.status !== 200) {
-        //   redirectToTheClientWebsite(data.error);
-        //   return;
-        // }
+        if (data.status !== 200) {
+          redirectToTheClientWebsite(data.error);
+          return;
+        }
 
         setBadReviewPageReviewed(true);
       })
