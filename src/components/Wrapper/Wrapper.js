@@ -234,7 +234,6 @@ const Wrapper = () => {
         )}
         <img src={logoPath} alt="logo" />
       </div>
-
       <div className="page-wrapper">
         <div className="review-container">
           <div className="review-component">
