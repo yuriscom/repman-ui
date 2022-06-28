@@ -16,7 +16,7 @@ import { detectMobile, getFloorFromAddress } from "../../utils";
 import "./style.scss";
 
 // assets
-import defaultLogo from "../../assets/wilderman.png";
+import defaultLogo from "../../assets/logo.bc3311f1.png";
 
 const Wrapper = () => {
   const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
