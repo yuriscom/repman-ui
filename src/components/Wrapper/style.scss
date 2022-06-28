@@ -87,10 +87,6 @@
   align-items: center;
   width: 90%;
   max-height: 100%;
-  // margin-top: 1rem;
-  // display: table-row;
-  // vertical-align: middle;
-  // padding: 2rem;
 }
 
 .logo-container {
@@ -104,6 +100,10 @@
   padding-bottom: 1rem;
   position: relative;
   border-bottom: 2px solid lightgray;
+
+  img {
+    max-width: 375px;
+  }
 }
 
 .review-component {

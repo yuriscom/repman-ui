@@ -37,7 +37,6 @@ const GoodReviewPage = ({
           redirectToTheClientWebsite("Good Review Page Error");
           return;
         }
-
         window.open(reviewLink, "_self");
         setActivePage(APP_FLOW_PAGES.RATE_PAGE);
         setUserRate(INIT_USER_RATE);
@@ -50,7 +49,10 @@ const GoodReviewPage = ({
   return (
     <div className="step-container positive-step">
       <p className="share-review-text">
-        {GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME[clinicUname]} <br />{" "}
+        {clinicUname
+          ? GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME[clinicUname]
+          : GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME.accuro}{" "}
+        <br />{" "}
         {clinicUname === "cosmetic" && (
           <span className="restrictions-word"> (restrictions apply)</span>
         )}
