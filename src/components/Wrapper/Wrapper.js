@@ -16,7 +16,7 @@ import { detectMobile, getFloorFromAddress } from "../../utils";
 import "./style.scss";
 
 // assets
-import defaultLogo from "../../assets/accurateImage.png";
+import defaultLogo from "../../assets/wilderman.png";
 
 const Wrapper = () => {
   const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
@@ -37,9 +37,9 @@ const Wrapper = () => {
   const location = useLocation();
 
   const redirectToTheClientWebsite = (error, link = clientWebsite) => {
-    // const errorMsg = error || "Hash is invalid";
-    // Sentry.captureMessage(errorMsg);
-    // window.open(link, "_self");
+    const errorMsg = error || "Hash is invalid";
+    Sentry.captureMessage(errorMsg);
+    window.open(link, "_self");
   };
 
   const validateHash = async (hash) => {
