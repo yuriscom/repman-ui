@@ -17,7 +17,7 @@ import "./style.scss";
 
 // assets
 // import defaultLogo from "../../assets/logo.bc3311f1.png";
-import defaultLogo from "../../assets/logo.aic331132.png";
+import defaultLogo from "../../assets/imagingClinicLogo.png";
 
 const Wrapper = () => {
   const [activePage, setActivePage] = useState(APP_FLOW_PAGES.RATE_PAGE);
