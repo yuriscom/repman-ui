@@ -36,7 +36,7 @@ export const GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME = {
           Please share this on Google reviews.`,
 
   cosmetic: `Thank you for your feedback, we are so happy you enjoyed your visit.
-  Please share this on Google reviews to receive 5,000 reward points,
+  Please share this on Google reviews to receive 100 reward points,
   redeemable at our clinic.
   `,
 };
