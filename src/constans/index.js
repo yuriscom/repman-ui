@@ -31,6 +31,13 @@ export const APP_FLOW_PAGES = {
   CLAIM_REFERENCE_PAGE: "CLAIM_REFERENCE_PAGE",
 };
 
+export const API_STATUS = {
+  IDLE: "idle",
+  LOADING: "loading",
+  SUCCESS: "success",
+  ERROR: "error",
+};
+
 export const GOOD_REVIEW_CONTENT_BY_CLINIC_UNAME = {
   accuro: `Thank you for your feedback, we are so happy you enjoyed your visit.
           Please share this on Google reviews.`,

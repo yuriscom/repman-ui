@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
-import { STAR_RATING_API, NUMBER_OF_STARS } from "../../constans";
+import { STAR_RATING_API, NUMBER_OF_STARS, API_STATUS } from "../../constans";
 import SubmitButton from "../Common/SubmitButton";
 
 // styles
@@ -15,9 +15,10 @@ const RatePage = ({
   setActivePage,
   setHash,
   redirectToTheClientWebsite,
-  
 }) => {
+  const [apiStatus, setApiStatus] = useState(API_STATUS.IDLE);
   const changeRating = () => {
+    setApiStatus(API_STATUS.LOADING);
     setTimeout(() => {
       // send star rating
       const myHeaders = new Headers();
@@ -39,15 +40,18 @@ const RatePage = ({
         .then((ratePageResult) => ratePageResult.json())
         .then((data) => {
           if (data.status !== 200) {
+            // setApiStatus(API_STATUS.ERROR);
             redirectToTheClientWebsite(data.error);
             return;
           }
 
           // setUserRate(newUserRate);
+          // setApiStatus(API_STATUS.SUCCESS);
           setHash(data.data.hash);
           setActivePage();
         })
         .catch(() => {
+          // setApiStatus(API_STATUS.ERROR);
           redirectToTheClientWebsite("Change Rating Error Page");
         });
     }, 300);
@@ -59,15 +63,24 @@ const RatePage = ({
         Hi{`${patientName ? " " : ""}${patientName}`}, thanks for visiting us at{" "}
         {clinicName}. We would love some feedback about your experience today!
       </p>
-      <StarRatings
-        rating={userRate}
-        starRatedColor="#f4cc1c"
-        changeRating={setUserRate}
-        numberOfStars={NUMBER_OF_STARS}
-        starSpacing="0.3rem"
-        starHoverColor="#f4cc1c"
-      />
-      <SubmitButton onSubmit={changeRating} />
+      {apiStatus === API_STATUS.LOADING ? (
+        <div className="loader-container">
+          <div className="loader" />
+          <span className="mt-1">Please wait a moment...</span>
+        </div>
+      ) : (
+        <>
+          <StarRatings
+            rating={userRate}
+            starRatedColor="#f4cc1c"
+            changeRating={setUserRate}
+            numberOfStars={NUMBER_OF_STARS}
+            starSpacing="0.3rem"
+            starHoverColor="#f4cc1c"
+          />
+          <SubmitButton disabled={userRate === 0} onSubmit={changeRating} />
+        </>
+      )}
     </div>
   );
 };
